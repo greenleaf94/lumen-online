@@ -5,6 +5,8 @@ import { CARDS } from "./game/cards";
 import { RULES } from "./game/rules";
 import { GameState, createInitialGame, defaultPlayerState, Seat } from "./game/state";
 import { advancePhase, getTakeFromList, getSkip } from "./game/engine";
+import fs from "fs";
+import path from "path";
 
 type Room = {
   id: string;
@@ -129,3 +131,13 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 server.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+
+function loadCardsDb() {
+  const p = path.join(process.cwd(), "public", "cards_db.json");
+  const raw = fs.readFileSync(p, "utf8");
+  return JSON.parse(raw);
+}
+
+app.get("/api/cards", (req, res) => {
+  res.json(loadCardsDb());
+});
