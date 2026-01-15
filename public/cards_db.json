@@ -1,0 +1,5308 @@
+{
+  "version": "nus-1.1.1",
+  "generatedAt": "2026-01-15T15:50:11",
+  "scope": {
+    "characters": [
+      "니아",
+      "울프",
+      "세츠메이"
+    ]
+  },
+  "cardsCount": 93,
+  "todoClauses": 95,
+  "cards": [
+    {
+      "id": "AWL-AT-054",
+      "character": "세츠메이",
+      "name": "훅 브레이커",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "중단 상쇄",
+      "specials": [
+        {
+          "type": "clash",
+          "height": "mid"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 10,
+        "onHit": 4,
+        "onGuard": -6,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①상쇄 시, 이 기술의 데미지+100",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-054#1",
+          "label": "①",
+          "trigger": "ON_CLASH",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "①상쇄 시, 이 기술의 데미지+100",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-054"
+      }
+    },
+    {
+      "id": "AWL-AT-016",
+      "character": "니아",
+      "name": "헬프캐쳐",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "hand",
+        "raw": "하단 손"
+      },
+      "specialJudgement": "상단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "top"
+        }
+      ],
+      "stats": {
+        "damage": 200,
+        "speed": 7,
+        "onHit": 2,
+        "onGuard": -4,
+        "onCounter": 4
+      },
+      "rules": {
+        "evadeMinSpeed": 10
+      },
+      "rulesText": [
+        "이 기술은 10속도 이상 기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 10속도 이상 기술만 회피할 수 있다. ①판정 전, 서로 기술의 속도가 2만큼 차이 날 때 서로의 속도를 고정한다. ②카운터 시, 상대의 배틀 존이나 루멘 존에 있는 기술 1장을 리스트로 보낸다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-016#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [
+            {
+              "type": "SPEED_DIFF_AT_LEAST",
+              "value": 2
+            }
+          ],
+          "actions": [
+            {
+              "type": "SYNC_SPEEDS"
+            }
+          ],
+          "raw": "①판정 전, 서로 기술의 속도가 2만큼 차이 날 때 서로의 속도를 고정한다.",
+          "impl": "ok"
+        },
+        {
+          "id": "AWL-AT-016#2",
+          "label": "②",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOVE_OPP_CARDS_TO_LIST",
+              "fromZone": "BATTLE",
+              "count": 1
+            }
+          ],
+          "raw": "②카운터 시, 상대의 배틀 존이나 루멘 존에 있는 기술 1장을 리스트로 보낸다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-016"
+      }
+    },
+    {
+      "id": "UNC-AT-047",
+      "character": "세츠메이",
+      "name": "하이킥",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "foot",
+        "raw": "상단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 7,
+        "onHit": 2,
+        "onGuard": -3,
+        "onCounter": 1
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①상대의 회피 시, 상대는 2FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-047#1",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 2
+            }
+          ],
+          "raw": "①상대의 회피 시, 상대는 2FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-047"
+      }
+    },
+    {
+      "id": "ST1-019",
+      "character": "세츠메이",
+      "name": "캐치 드롭",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "그랩",
+      "specials": [
+        {
+          "type": "grab"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 10,
+        "onHit": 5,
+        "onCounter": 5
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상대는 이 기술을 방어 및 상쇄할 수 없다.①이 기술이 무효될 경우 자신은 4FP를 잃는다.②콤보 시, 3콤보 후 이을 수 있으며 처리 후 콤보 타임을 종료한다.그 후, 다음 리커버리 페이즈 시 자신은 1FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "ST1-019#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-019#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "LOSE_FP",
+              "who": "self",
+              "amount": 4
+            }
+          ],
+          "raw": "①이 기술이 무효될 경우 자신은 4FP를 잃는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "ST1-019#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 1
+            }
+          ],
+          "raw": "②콤보 시, 3콤보 후 이을 수 있으며 처리 후 콤보 타임을 종료한다.그 후, 다음 리커버리 페이즈 시 자신은 1FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-019"
+      }
+    },
+    {
+      "id": "CRS-AT-021",
+      "character": "니아",
+      "name": "플루스 울트라!!",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {
+        "deckLimit": 2,
+        "cannotUseInPhases": [
+          "READY"
+        ],
+        "perTurnLimit": 1
+      },
+      "rulesText": [
+        "이 기술은 2장까지 덱에 넣을 수 있다",
+        "이 기술은 레디 페이즈에서 사용할 수 없다",
+        "이 카드명의 효과는 어느쪽이든 턴당 1번만 사용할 수 있다"
+      ],
+      "effectsText": "이 기술은 2장까지 덱에 넣을 수 있다.이 기술은 레디 페이즈에서 사용할 수 없다.이 카드명의 효과는 어느쪽이든 턴당 1번만 사용할 수 있다.①이 기술이 루멘 존으로 보내졌을 경우, 사이드 덱에서 공격 혹은 수비 기술 1장을 루멘 존으로 보낸다.②이 기술이 루멘 존에 있는 동안 이하의 효과를 적용한다.-콤보 시, 〈12속도 이상 [니아] 기술〉을 사용할 경우 이 기술을 브레이크할 수 있다.그 경우, 자신은 200데미지를 받고 해당 기술 데미지+100",
+      "effectClauses": [
+        {
+          "id": "CRS-AT-021#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①이 기술이 루멘 존으로 보내졌을 경우, 사이드 덱에서 공격 혹은 수비 기술 1장을 루멘 존으로 보낸다."
+            }
+          ],
+          "raw": "①이 기술이 루멘 존으로 보내졌을 경우, 사이드 덱에서 공격 혹은 수비 기술 1장을 루멘 존으로 보낸다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CRS-AT-021#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            },
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "②이 기술이 루멘 존에 있는 동안 이하의 효과를 적용한다.-콤보 시, 〈12속도 이상 [니아] 기술〉을 사용할 경우 이 기술을 브레이크할 수 있다.그 경우, 자신은 200데미지를 받고 해당 기술 데미지+100",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CRS-AT-021"
+      }
+    },
+    {
+      "id": "LMI-AT-049",
+      "character": "세츠메이",
+      "name": "플렉시블 닷지",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onHit": "회피",
+        "onGuard": "회피"
+      },
+      "rules": {
+        "evadeOppHitGte": 4,
+        "evadeOppHitCombo": true
+      },
+      "rulesText": [
+        "이 기술은 히트 판정이 <+4>이상, 또는 <콤보>인 기술을 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 히트 판정이 <+4>이상, 또는 <콤보>인 기술을 회피할 수 있다. ①회피 시, 5FP를 얻는다. 그 후, 이번 턴 자신은 캐치할 수 없다. ②사용 후, 500데미지 이상 받았다면 자신의 리스트에서 기술 1장을 획득한다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-049#1",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 5
+            },
+            {
+              "type": "APPLY_STATUS",
+              "who": "self",
+              "status": "CANNOT_CATCH",
+              "duration": "TURN"
+            },
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①회피 시, 5FP를 얻는다.그 후, 이번 턴 자신은 캐치할 수 없다."
+            }
+          ],
+          "raw": "①회피 시, 5FP를 얻는다.그 후, 이번 턴 자신은 캐치할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "LMI-AT-049#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [
+            {
+              "type": "DAMAGE_TAKEN_AT_LEAST",
+              "value": 500
+            }
+          ],
+          "actions": [
+            {
+              "type": "TAKE_FROM_LIST",
+              "who": "self",
+              "count": 1
+            }
+          ],
+          "raw": "②사용 후, 500데미지 이상 받았다면 자신의 리스트에서 기술 1장을 획득한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-049"
+      }
+    },
+    {
+      "id": "LMI-AT-011",
+      "character": "니아",
+      "name": "프로토콜: 익시드",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {
+        "immuneToOtherEffects": true
+      },
+      "rulesText": [
+        "이 카드는 다른 기술의 영향을 받지 않는다"
+      ],
+      "effectsText": "이 카드는 다른 기술의 영향을 받지 않는다. ①게임 중 처음 「오버 리밋」상태가 된 턴의 배틀 페이즈 종료 시, 사이드 덱에서 루멘 존에 배치할 수 있다. 이 카드가 루멘 존에 있는 동안 이하의 효과를 적용한다. -「오버 리밋」의 해제 조건이 8장에서 11장 이상이 된다. -자신은 루멘 존의 [니아] 기술을 브레이크할 수 없다. -겟 페이즈 시, 루멘 존에서 [니아] 기술 1장을 획득할 수 있다. -콤보 시, 루멘 존의 [니아] 기술을 1장까지 콤보에 사용할 수 있다. 그 경우, 사용한 그 기술을 브레이크한다. -「오버 리밋」 해제 시, 자신은 500데미지를 받는다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-011#1",
+          "label": "①",
+          "trigger": "ON_BATTLE_END",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①게임 중 처음 「오버 리밋」상태가 된 턴의 배틀 페이즈 종료 시, 사이드 덱에서 루멘 존에 배치할 수 있다.이 카드가 루멘 존에 있는 동안 이하의 효과를 적용한다.-「오버 리밋」의 해제 조건이 8장에서 11장 이상이 된다.-자신은 루멘 존의 [니아] 기술을 브레이크할 수 없다.-겟 페이즈 시, 루멘 존에서 [니아] 기술 1장을 획득할 수 있다.-콤보 시, 루멘 존의 [니아] 기술을 1장까지 콤보에 사용할 수 있다.그 경우, 사용한 그 기술을 브레이크한다.-「오버 리밋」 해제 시, 자신은 500데미지를 받는다"
+            }
+          ],
+          "raw": "①게임 중 처음 「오버 리밋」상태가 된 턴의 배틀 페이즈 종료 시, 사이드 덱에서 루멘 존에 배치할 수 있다.이 카드가 루멘 존에 있는 동안 이하의 효과를 적용한다.-「오버 리밋」의 해제 조건이 8장에서 11장 이상이 된다.-자신은 루멘 존의 [니아] 기술을 브레이크할 수 없다.-겟 페이즈 시, 루멘 존에서 [니아] 기술 1장을 획득할 수 있다.-콤보 시, 루멘 존의 [니아] 기술을 1장까지 콤보에 사용할 수 있다.그 경우, 사용한 그 기술을 브레이크한다.-「오버 리밋」 해제 시, 자신은 500데미지를 받는다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-011"
+      }
+    },
+    {
+      "id": "AWL-AT-053",
+      "character": "세츠메이",
+      "name": "프라이 엔드",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": null,
+        "raw": "하단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 11,
+        "onHit": 3,
+        "onCounter": 3
+      },
+      "rules": {
+        "cannotBeGuarded": true
+      },
+      "rulesText": [
+        "이 기술은 방어할 수 없다"
+      ],
+      "effectsText": "이 기술은 방어할 수 없다. ①히트 시, 이 기술을 브레이크 한다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-053#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①히트 시, 이 기술을 브레이크 한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-053"
+      }
+    },
+    {
+      "id": "UNC-AT-048",
+      "character": "세츠메이",
+      "name": "프라이 스윙",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": null,
+        "raw": "상단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 9,
+        "onHit": 4,
+        "onGuard": -4,
+        "onCounter": 6
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①콤보 시, 2~3콤보에 사용했다면 이 기술 앞에 사용한 기술을 브레이크할 수 있다. 그 경우, 이 기술 데미지+200",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-048#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "①콤보 시, 2~3콤보에 사용했다면 이 기술 앞에 사용한 기술을 브레이크할 수 있다.그 경우, 이 기술 데미지+200",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-048"
+      }
+    },
+    {
+      "id": "ST5-004",
+      "character": "울프",
+      "name": "펜리르 스틱스",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "hand",
+        "raw": "하단 손"
+      },
+      "specialJudgement": "상단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "top"
+        }
+      ],
+      "stats": {
+        "damage": 700,
+        "speed": 8,
+        "onHit": 6,
+        "onGuard": -9,
+        "onCounter": "콤보"
+      },
+      "rules": {
+        "evadeOnlyOppDamage": 500
+      },
+      "rulesText": [
+        "이 기술은 500데미지 기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 500데미지 기술만 회피할 수 있다.①캐치 시 기술 데미지-200. 그 후 히트 판정을<콤보>로 변경하고 이 기술을 브레이크한다.②콤보 시 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "ST5-004#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            },
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①캐치 시 기술 데미지-200.그 후 히트 판정을<콤보>로 변경하고 이 기술을 브레이크한다."
+            }
+          ],
+          "raw": "①캐치 시 기술 데미지-200.그 후 히트 판정을<콤보>로 변경하고 이 기술을 브레이크한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST5-004#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "②콤보 시 이 기술을 브레이크한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-004"
+      }
+    },
+    {
+      "id": "LMI-AT-052",
+      "character": "세츠메이",
+      "name": "패스트 힛",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 300,
+        "speed": 5,
+        "onHit": 1,
+        "onGuard": -5,
+        "onCounter": 2
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "",
+      "effectClauses": [],
+      "meta": {
+        "firstAppearance": "LMI-AT-052"
+      }
+    },
+    {
+      "id": "ST5-010",
+      "character": "울프",
+      "name": "타뷸라",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onHit": "회피",
+        "onGuard": "상쇄"
+      },
+      "rules": {
+        "evadeMaxSpeed": 9,
+        "clashMaxSpeed": 9
+      },
+      "rulesText": [
+        "이 기술은 9속도 이하 기술만 회피 및 상쇄할 수 있다"
+      ],
+      "effectsText": "이 기술은 9속도 이하 기술만 회피 및 상쇄할 수 있다.①회피 시 상대에게 300데미지를 주고 자신은 5FP를 얻는다.이번 턴 자신은 캐치할 수 없다.②상쇄 시 상대 기술 데미지-400, 상대에게 200데미지를 준다.그 후 상대 FP를 <+1>로 조정한다.",
+      "effectClauses": [
+        {
+          "id": "ST5-010#1",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 5
+            },
+            {
+              "type": "DEAL_DAMAGE",
+              "who": "opponent",
+              "amount": 300
+            },
+            {
+              "type": "APPLY_STATUS",
+              "who": "self",
+              "status": "CANNOT_CATCH",
+              "duration": "TURN"
+            },
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①회피 시 상대에게 300데미지를 주고 자신은 5FP를 얻는다.이번 턴 자신은 캐치할 수 없다."
+            }
+          ],
+          "raw": "①회피 시 상대에게 300데미지를 주고 자신은 5FP를 얻는다.이번 턴 자신은 캐치할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST5-010#2",
+          "label": "②",
+          "trigger": "ON_CLASH",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②상쇄 시 상대 기술 데미지-400, 상대에게 200데미지를 준다.그 후 상대 FP를 <+1>로 조정한다"
+            }
+          ],
+          "raw": "②상쇄 시 상대 기술 데미지-400, 상대에게 200데미지를 준다.그 후 상대 FP를 <+1>로 조정한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-010"
+      }
+    },
+    {
+      "id": "UNC-AT-011",
+      "character": "니아",
+      "name": "라이! 레피! 캐치!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "그랩",
+      "specials": [
+        {
+          "type": "grab"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 12,
+        "onHit": 5,
+        "onCounter": 6
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 특수 판정으로 회피할 수 없다"
+      ],
+      "effectsText": "상대는 이 기술을 방어 및 상쇄할 수 없다. 이 기술은 특수 판정으로 회피할 수 없다. ①이 기술이 무효 및 회피된다면 상대는 2FP를 얻는다. ②콤보 시, 이 기술은 3콤보 후 사용할 수 있다. ③콤보 시, 속도에 관계없이 `라이!` 혹은 `레피!`명이 들어간 기술 다음으로 이을 수 있다. ④「오버 리밋」: 콤보 시, 처리 후 콤보 타임을 종료하고 다음 리커버리 페이즈 시, 자신은 1FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-011#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-011#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 2
+            }
+          ],
+          "raw": "①이 기술이 무효 및 회피된다면 상대는 2FP를 얻는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "UNC-AT-011#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 이 기술은 3콤보 후 사용할 수 있다."
+            }
+          ],
+          "raw": "②콤보 시, 이 기술은 3콤보 후 사용할 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-011#4",
+          "label": "③",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "③콤보 시, 속도에 관계없이 `라이!` 혹은 `레피!`명이 들어간 기술 다음으로 이을 수 있다."
+            }
+          ],
+          "raw": "③콤보 시, 속도에 관계없이 `라이!` 혹은 `레피!`명이 들어간 기술 다음으로 이을 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-011#5",
+          "label": "④",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 1
+            }
+          ],
+          "raw": "④「오버 리밋」: 콤보 시, 처리 후 콤보 타임을 종료하고 다음 리커버리 페이즈 시, 자신은 1FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-011"
+      }
+    },
+    {
+      "id": "CRS-AT-051",
+      "character": "세츠메이",
+      "name": "코일링 서펜트",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "foot",
+        "raw": "하단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 8,
+        "onHit": 3,
+        "onGuard": -5,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①히트 시, 상대 기술이 수비 기술일 경우그 기술을 리스트로 보낸다.",
+      "effectClauses": [
+        {
+          "id": "CRS-AT-051#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [
+            {
+              "type": "OPP_IS_DEFENSE"
+            }
+          ],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①히트 시, 상대 기술이 수비 기술일 경우그 기술을 리스트로 보낸다"
+            }
+          ],
+          "raw": "①히트 시, 상대 기술이 수비 기술일 경우그 기술을 리스트로 보낸다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CRS-AT-051"
+      }
+    },
+    {
+      "id": "AWL-AT-039",
+      "character": "울프",
+      "name": "컷다운",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "hand",
+        "raw": "하단 손"
+      },
+      "specialJudgement": "상단 상쇄",
+      "specials": [
+        {
+          "type": "clash",
+          "height": "top"
+        }
+      ],
+      "stats": {
+        "damage": 400,
+        "speed": 12,
+        "onHit": 7,
+        "onGuard": -6,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 7속도 이하인 기술만 상쇄할 수 있다"
+      ],
+      "effectsText": "이 기술은 7속도 이하인 기술만 상쇄할 수 있다. ①상쇄 시, 이 기술 데미지+400 ②콤보 시, 이 기술은 데미지 보정이 적용되지 않는다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-039#1",
+          "label": "①",
+          "trigger": "ON_CLASH",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 400
+            }
+          ],
+          "raw": "①상쇄 시, 이 기술 데미지+400",
+          "impl": "ok"
+        },
+        {
+          "id": "AWL-AT-039#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 이 기술은 데미지 보정이 적용되지 않는다"
+            }
+          ],
+          "raw": "②콤보 시, 이 기술은 데미지 보정이 적용되지 않는다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-039"
+      }
+    },
+    {
+      "id": "CRS-AT-052",
+      "character": "세츠메이",
+      "name": "컴뱃센스",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {
+        "cannotUseInPhases": [
+          "READY"
+        ]
+      },
+      "rulesText": [
+        "이 기술은 덱에 3장까지 넣을 수 있다",
+        "이 기술은 레디 페이즈에서 사용할 수 없다"
+      ],
+      "effectsText": "이 기술은 덱에 3장까지 넣을 수 있다.이 기술은 레디 페이즈에서 사용할 수 없다.①이 기술이 브레이크 되었을 경우, 자신은 1FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "CRS-AT-052#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 1
+            }
+          ],
+          "raw": "①이 기술이 브레이크 되었을 경우, 자신은 1FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CRS-AT-052"
+      }
+    },
+    {
+      "id": "ST1-016",
+      "character": "세츠메이",
+      "name": "커팅",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 5,
+        "onHit": 2,
+        "onGuard": -2,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시 이 기술 데미지+200②상대 회피 시 상대는 4FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "ST1-016#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "①카운터 시 이 기술 데미지+200",
+          "impl": "ok"
+        },
+        {
+          "id": "ST1-016#2",
+          "label": "②",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 4
+            }
+          ],
+          "raw": "②상대 회피 시 상대는 4FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-016"
+      }
+    },
+    {
+      "id": "ST1-002",
+      "character": "니아",
+      "name": "캐츠 머핀즈",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 6,
+        "onHit": 1,
+        "onGuard": -4,
+        "onCounter": 2
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①「오버 리밋」: 이 기술 데미지 -300②판정 전 상대 공격 기술이 7속도 이하 손 판정 기술인 경우 자신은 2FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "ST1-002#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①「오버 리밋」: 이 기술 데미지 -300"
+            }
+          ],
+          "raw": "①「오버 리밋」: 이 기술 데미지 -300",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-002#2",
+          "label": "②",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 2
+            }
+          ],
+          "raw": "②판정 전 상대 공격 기술이 7속도 이하 손 판정 기술인 경우 자신은 2FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-002"
+      }
+    },
+    {
+      "id": "ST5-003",
+      "character": "울프",
+      "name": "카인 나시스",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 7,
+        "onHit": 3,
+        "onGuard": -6,
+        "onCounter": 5
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시 상대에게 100데미지를 2번 준다.",
+      "effectClauses": [
+        {
+          "id": "ST5-003#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①카운터 시 상대에게 100데미지를 2번 준다"
+            }
+          ],
+          "raw": "①카운터 시 상대에게 100데미지를 2번 준다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-003"
+      }
+    },
+    {
+      "id": "PMP-AT-051",
+      "character": "세츠메이",
+      "name": "카운터 슬래시",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 300,
+        "speed": 8,
+        "onHit": 3,
+        "onGuard": -6,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 시, 상대 배틀 존의 공격 기술에 <콤보> 판정이 있을 경우 이 기술의 히트 판정을 <콤보>로 변경한다.②카운터 시 이 기술 데미지 +200",
+      "effectClauses": [
+        {
+          "id": "PMP-AT-051#1",
+          "label": "①",
+          "trigger": "ON_PLAY",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①사용 시, 상대 배틀 존의 공격 기술에 <콤보> 판정이 있을 경우 이 기술의 히트 판정을 <콤보>로 변경한다."
+            }
+          ],
+          "raw": "①사용 시, 상대 배틀 존의 공격 기술에 <콤보> 판정이 있을 경우 이 기술의 히트 판정을 <콤보>로 변경한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "PMP-AT-051#2",
+          "label": "②",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②카운터 시 이 기술 데미지 +200"
+            }
+          ],
+          "raw": "②카운터 시 이 기술 데미지 +200",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "PMP-AT-051"
+      }
+    },
+    {
+      "id": "ST3-017",
+      "character": "세츠메이",
+      "name": "카운터 랫",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "foot",
+        "raw": "중단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 7,
+        "onHit": 1,
+        "onGuard": -6,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시 리스트에서 5속도 기술로 캐치할 수 있다.그 후 캐치한 기술과 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "ST3-017#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            },
+            {
+              "type": "CATCH_FROM_LIST",
+              "who": "self",
+              "filter": {
+                "speed": 5
+              }
+            }
+          ],
+          "raw": "①카운터 시 리스트에서 5속도 기술로 캐치할 수 있다.그 후 캐치한 기술과 이 기술을 브레이크한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST3-017"
+      }
+    },
+    {
+      "id": "ST5-009",
+      "character": "울프",
+      "name": "체이싱 팽",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "하단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "bottom"
+        }
+      ],
+      "stats": {
+        "damage": 900,
+        "speed": 13,
+        "onHit": 3,
+        "onGuard": -9,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 500데미지 이하 기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 500데미지 이하 기술만 회피할 수 있다.①판정 전 상대가 8속도 이상 공격 기술을 사용했다면이 기술은 7속도 고정 및 중단 기술로 변경한다.②콤보 시 2~3콤보 중에 사용했다면 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "ST5-009#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①판정 전 상대가 8속도 이상 공격 기술을 사용했다면이 기술은 7속도 고정 및 중단 기술로 변경한다."
+            }
+          ],
+          "raw": "①판정 전 상대가 8속도 이상 공격 기술을 사용했다면이 기술은 7속도 고정 및 중단 기술로 변경한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST5-009#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "②콤보 시 2~3콤보 중에 사용했다면 이 기술을 브레이크한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-009"
+      }
+    },
+    {
+      "id": "CRS-AT-050",
+      "character": "세츠메이",
+      "name": "체이싱 팬",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "하단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "bottom"
+        }
+      ],
+      "stats": {
+        "damage": 400,
+        "speed": 13,
+        "onHit": "콤보",
+        "onGuard": -8,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 〈8속도 이하〉기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 〈8속도 이하〉기술만 회피할 수 있다.상대는 이 기술을 상쇄할 수 없다.①판정 전, 자신의 FP가 불리할 경우 상대는 이 기술을 회피할 수 없다.",
+      "effectClauses": [
+        {
+          "id": "CRS-AT-050#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 상쇄할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 상쇄할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CRS-AT-050#2",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①판정 전, 자신의 FP가 불리할 경우 상대는 이 기술을 회피할 수 없다"
+            }
+          ],
+          "raw": "①판정 전, 자신의 FP가 불리할 경우 상대는 이 기술을 회피할 수 없다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CRS-AT-050"
+      }
+    },
+    {
+      "id": "UNC-AT-013",
+      "character": "니아",
+      "name": "죄송합니다아아아앗!",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onHit": "회피",
+        "onGuard": "회피"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상단은 10속도 이하 기술만 회피할 수 있다.중단은 8속도 이하 기술만 회피할 수 있다.①회피 시, 자신은 2FP를 얻는다.②판정 후, 데미지를 받았다면 이 기술을브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-013#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상단은 10속도 이하 기술만 회피할 수 있다.중단은 8속도 이하 기술만 회피할 수 있다."
+            }
+          ],
+          "raw": "상단은 10속도 이하 기술만 회피할 수 있다.중단은 8속도 이하 기술만 회피할 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-013#2",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 2
+            }
+          ],
+          "raw": "①회피 시, 자신은 2FP를 얻는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "UNC-AT-013#3",
+          "label": "②",
+          "trigger": "AFTER_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②판정 후, 데미지를 받았다면 이 기술을브레이크한다"
+            }
+          ],
+          "raw": "②판정 후, 데미지를 받았다면 이 기술을브레이크한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-013"
+      }
+    },
+    {
+      "id": "AWL-AT-038",
+      "character": "울프",
+      "name": "제트 라이징",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": null,
+        "raw": "중단"
+      },
+      "specialJudgement": "중단 상쇄",
+      "specials": [
+        {
+          "type": "clash",
+          "height": "mid"
+        }
+      ],
+      "stats": {
+        "damage": 700,
+        "speed": 11,
+        "onHit": "콤보",
+        "onGuard": -8,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①상쇄 시, 상대 기술의 속도가 8속도 이상일 경우 이 기술 데미지+200 ②콤보 시, 3콤보 후 사용할 수 있다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-038#1",
+          "label": "①",
+          "trigger": "ON_CLASH",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "①상쇄 시, 상대 기술의 속도가 8속도 이상일 경우 이 기술 데미지+200",
+          "impl": "ok"
+        },
+        {
+          "id": "AWL-AT-038#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 3콤보 후 사용할 수 있다"
+            }
+          ],
+          "raw": "②콤보 시, 3콤보 후 사용할 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-038"
+      }
+    },
+    {
+      "id": "LMI-AT-050",
+      "character": "세츠메이",
+      "name": "제로-섬",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 11,
+        "onHit": 3,
+        "onGuard": -5,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①판정 전, 자신의 리스트에서 2장까지 브레이크할 수 있다. 그 후, 브레이크한 기술 1장당 자신은 2FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-050#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 2
+            }
+          ],
+          "raw": "①판정 전, 자신의 리스트에서 2장까지 브레이크할 수 있다.그 후, 브레이크한 기술 1장당 자신은 2FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-050"
+      }
+    },
+    {
+      "id": "ST1-014",
+      "character": "세츠메이",
+      "name": "점프",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onGuard": "회피",
+        "onCounter": "회피"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "중단은 7속도 이하만 회피할 수 있다.①회피시 상대의 기술 속도-2 만큼 FP를 얻는다.(최대 8FP)②상대 기술에 <그랩>판정이 있는 경우 사용 후이 기술과 해당 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "ST1-014#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "중단은 7속도 이하만 회피할 수 있다."
+            }
+          ],
+          "raw": "중단은 7속도 이하만 회피할 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-014#2",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①회피시 상대의 기술 속도-2 만큼 FP를 얻는다.(최대 8FP)"
+            }
+          ],
+          "raw": "①회피시 상대의 기술 속도-2 만큼 FP를 얻는다.(최대 8FP)",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-014#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②상대 기술에 <그랩>판정이 있는 경우 사용 후이 기술과 해당 기술을 브레이크한다"
+            }
+          ],
+          "raw": "②상대 기술에 <그랩>판정이 있는 경우 사용 후이 기술과 해당 기술을 브레이크한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-014"
+      }
+    },
+    {
+      "id": "LMI-AT-048",
+      "character": "세츠메이",
+      "name": "임팩트 트리거",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": null,
+        "raw": "상단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 0,
+        "speed": 6,
+        "onHit": 6,
+        "onGuard": -10,
+        "onCounter": 8
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 <6속도>로 고정된다"
+      ],
+      "effectsText": "이 기술은 <6속도>로 고정된다. ①사용 후, 자신은 이번 턴 캐치할 수 없다. ②상대의 회피 시, 상대는 7FP를 얻는다. ③사용 후, 이 기술을 자신의 루멘 존에 배치한다. 그 후 이하의 효과를 적용한다. -게임당 한 번 루멘 페이즈 시, 자신의 체력이 2500 이하일 경우 이 기술을 리스트로 보낸다. -루멘 존의 이 카드는 다른 카드의 효과로 리스트로 보낼 수 없다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-048#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "APPLY_STATUS",
+              "who": "self",
+              "status": "CANNOT_CATCH",
+              "duration": "TURN"
+            },
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①사용 후, 자신은 이번 턴 캐치할 수 없다."
+            }
+          ],
+          "raw": "①사용 후, 자신은 이번 턴 캐치할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "LMI-AT-048#2",
+          "label": "②",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 7
+            }
+          ],
+          "raw": "②상대의 회피 시, 상대는 7FP를 얻는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "LMI-AT-048#3",
+          "label": "③",
+          "trigger": "ON_LUMEN_PHASE",
+          "conditions": [
+            {
+              "type": "HP_COMPARE",
+              "who": "self",
+              "op": "<=",
+              "value": 2500
+            }
+          ],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "③사용 후, 이 기술을 자신의 루멘 존에 배치한다.그 후 이하의 효과를 적용한다.-게임당 한 번 루멘 페이즈 시, 자신의 체력이 2500 이하일 경우 이 기술을 리스트로 보낸다.-루멘 존의 이 카드는 다른 카드의 효과로 리스트로 보낼 수 없다"
+            }
+          ],
+          "raw": "③사용 후, 이 기술을 자신의 루멘 존에 배치한다.그 후 이하의 효과를 적용한다.-게임당 한 번 루멘 페이즈 시, 자신의 체력이 2500 이하일 경우 이 기술을 리스트로 보낸다.-루멘 존의 이 카드는 다른 카드의 효과로 리스트로 보낼 수 없다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-048"
+      }
+    },
+    {
+      "id": "ST1-020",
+      "character": "세츠메이",
+      "name": "이판사판태클",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": null,
+        "raw": "중단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 900,
+        "speed": 12,
+        "onHit": 4,
+        "onGuard": -6,
+        "onCounter": 6
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①이 기술은 콤보에 사용할 수 없다.②상대 방어 시 자신은 300데미지를 받는다.③상대 회피 시 자신은 4FP를 잃는다.④상대 상쇄 시 이 기술 데미지-400",
+      "effectClauses": [
+        {
+          "id": "ST1-020#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①이 기술은 콤보에 사용할 수 없다."
+            }
+          ],
+          "raw": "①이 기술은 콤보에 사용할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-020#2",
+          "label": "②",
+          "trigger": "ON_GUARD",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②상대 방어 시 자신은 300데미지를 받는다."
+            }
+          ],
+          "raw": "②상대 방어 시 자신은 300데미지를 받는다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-020#3",
+          "label": "③",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "LOSE_FP",
+              "who": "self",
+              "amount": 4
+            }
+          ],
+          "raw": "③상대 회피 시 자신은 4FP를 잃는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "ST1-020#4",
+          "label": "④",
+          "trigger": "ON_CLASH",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "④상대 상쇄 시 이 기술 데미지-400"
+            }
+          ],
+          "raw": "④상대 상쇄 시 이 기술 데미지-400",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-020"
+      }
+    },
+    {
+      "id": "ST5-001",
+      "character": "울프",
+      "name": "울프 커터",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 5,
+        "onHit": 2,
+        "onGuard": -2,
+        "onCounter": 2
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①「위압」 : 콤보 시 속도에 관계없이중단 기술 다음으로 이을 수 있다.만약 원래 데미지가 500데미지 이하 기술다음으로 사용했다면 이 기술 데미지+200",
+      "effectClauses": [
+        {
+          "id": "ST5-001#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "①「위압」 : 콤보 시 속도에 관계없이중단 기술 다음으로 이을 수 있다.만약 원래 데미지가 500데미지 이하 기술다음으로 사용했다면 이 기술 데미지+200",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-001"
+      }
+    },
+    {
+      "id": "ST5-006",
+      "character": "울프",
+      "name": "울브즈",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 10,
+        "onHit": "콤보",
+        "onGuard": -5,
+        "onCounter": 2
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시 상대에게 300데미지를 준다.",
+      "effectClauses": [
+        {
+          "id": "ST5-006#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①카운터 시 상대에게 300데미지를 준다"
+            }
+          ],
+          "raw": "①카운터 시 상대에게 300데미지를 준다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-006"
+      }
+    },
+    {
+      "id": "CB01-AT-017",
+      "character": "울프",
+      "name": "스트롱 블리츠",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "그랩",
+      "specials": [
+        {
+          "type": "grab"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 10,
+        "onHit": 4,
+        "onCounter": 6
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상대는 이 기술을 방어 및 상쇄할 수 없다. ①이 기술이 그랩 무효 되었을 경우, 상대에게 100데미지를 준다. 그 후, 자신은 4FP를 잃는다. ②히트 시, 상대에게 100데미지를 준다.",
+      "effectClauses": [
+        {
+          "id": "CB01-AT-017#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CB01-AT-017#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "LOSE_FP",
+              "who": "self",
+              "amount": 4
+            }
+          ],
+          "raw": "①이 기술이 그랩 무효 되었을 경우, 상대에게 100데미지를 준다.그 후, 자신은 4FP를 잃는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "CB01-AT-017#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②히트 시, 상대에게 100데미지를 준다"
+            }
+          ],
+          "raw": "②히트 시, 상대에게 100데미지를 준다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CB01-AT-017"
+      }
+    },
+    {
+      "id": "UNC-AT-052",
+      "character": "세츠메이",
+      "name": "에어 슬래시 킥",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": null,
+        "raw": "중단"
+      },
+      "specialJudgement": "하단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "bottom"
+        }
+      ],
+      "stats": {
+        "damage": 600,
+        "speed": 13,
+        "onHit": 6,
+        "onGuard": -8,
+        "onCounter": 7
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 7~9속도 기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 7~9속도 기술만 회피할 수 있다. ①콤보 시, 4콤보 후 사용 할 수 있다. ②콤보 시, 이 기술의 데미지+300",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-052#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①콤보 시, 4콤보 후 사용 할 수 있다."
+            }
+          ],
+          "raw": "①콤보 시, 4콤보 후 사용 할 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-052#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 300
+            }
+          ],
+          "raw": "②콤보 시, 이 기술의 데미지+300",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-052"
+      }
+    },
+    {
+      "id": "AWL-AT-052",
+      "character": "세츠메이",
+      "name": "앵클 슬라이서",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "hand",
+        "raw": "하단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 9,
+        "onHit": 4,
+        "onGuard": -8,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 후, 자신은 이번 턴 캐치할 수 없다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-052#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "APPLY_STATUS",
+              "who": "self",
+              "status": "CANNOT_CATCH",
+              "duration": "TURN"
+            },
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①사용 후, 자신은 이번 턴 캐치할 수 없다"
+            }
+          ],
+          "raw": "①사용 후, 자신은 이번 턴 캐치할 수 없다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-052"
+      }
+    },
+    {
+      "id": "AWL-AT-037",
+      "character": "울프",
+      "name": "앱솔루트",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 9,
+        "onHit": 6,
+        "onGuard": -5,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시, 이 기술의 데미지+100 ②[위압] : 콤보 시, 10속도로 사용할 수 있다. 그 경우 상대에게 100데미지를 2번 준다. 그 후, 자신의 다음 턴 루멘 페이즈를 스킵한다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-037#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "①카운터 시, 이 기술의 데미지+100",
+          "impl": "ok"
+        },
+        {
+          "id": "AWL-AT-037#2",
+          "label": "②",
+          "trigger": "ON_LUMEN_PHASE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②[위압] : 콤보 시, 10속도로 사용할 수 있다.그 경우 상대에게 100데미지를 2번 준다.그 후, 자신의 다음 턴 루멘 페이즈를 스킵한다"
+            }
+          ],
+          "raw": "②[위압] : 콤보 시, 10속도로 사용할 수 있다.그 경우 상대에게 100데미지를 2번 준다.그 후, 자신의 다음 턴 루멘 페이즈를 스킵한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-037"
+      }
+    },
+    {
+      "id": "CB01-AT-007",
+      "character": "니아",
+      "name": "데인저러스 캐치",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "그랩",
+      "specials": [
+        {
+          "type": "grab"
+        }
+      ],
+      "stats": {
+        "damage": 400,
+        "speed": 9,
+        "onHit": 4,
+        "onGuard": -7,
+        "onCounter": 5
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "이 기술이 그랩 무효 되었을 경우, 이 기술을 사이드 덱으로 보낸다.①「오버 리밋」: 상대는 이 기술을 방어할 수 없다.②히트 시 브레이크 존의 <[니아] 공격 기술> 1장을 사이드 덱으로 보낸다.",
+      "effectClauses": [
+        {
+          "id": "CB01-AT-007#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "이 기술이 그랩 무효 되었을 경우, 이 기술을 사이드 덱으로 보낸다."
+            }
+          ],
+          "raw": "이 기술이 그랩 무효 되었을 경우, 이 기술을 사이드 덱으로 보낸다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CB01-AT-007#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①「오버 리밋」: 상대는 이 기술을 방어할 수 없다."
+            }
+          ],
+          "raw": "①「오버 리밋」: 상대는 이 기술을 방어할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CB01-AT-007#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②히트 시 브레이크 존의 <[니아] 공격 기술> 1장을 사이드 덱으로 보낸다"
+            }
+          ],
+          "raw": "②히트 시 브레이크 존의 <[니아] 공격 기술> 1장을 사이드 덱으로 보낸다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CB01-AT-007"
+      }
+    },
+    {
+      "id": "ST5-005",
+      "character": "울프",
+      "name": "썬더 아르틱",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "foot",
+        "raw": "상단 발"
+      },
+      "specialJudgement": "하단 상쇄",
+      "specials": [
+        {
+          "type": "clash",
+          "height": "bottom"
+        }
+      ],
+      "stats": {
+        "damage": 600,
+        "speed": 9,
+        "onHit": 5,
+        "onGuard": -3,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 500데미지 이하 기술만 상쇄할 수 있다"
+      ],
+      "effectsText": "이 기술은 500데미지 이하 기술만 상쇄할 수 있다.①「위압」 : 콤보 시 속도에 관계없이 상단 기술다음으로 이을 수 있다.",
+      "effectClauses": [
+        {
+          "id": "ST5-005#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①「위압」 : 콤보 시 속도에 관계없이 상단 기술다음으로 이을 수 있다"
+            }
+          ],
+          "raw": "①「위압」 : 콤보 시 속도에 관계없이 상단 기술다음으로 이을 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-005"
+      }
+    },
+    {
+      "id": "AWL-AT-051",
+      "character": "세츠메이",
+      "name": "스플릿 커터",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "foot",
+        "raw": "하단 발"
+      },
+      "specialJudgement": "하단 상쇄",
+      "specials": [
+        {
+          "type": "clash",
+          "height": "bottom"
+        }
+      ],
+      "stats": {
+        "damage": 400,
+        "speed": 10,
+        "onHit": "콤보",
+        "onGuard": -8,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 발 판정 기술만 상쇄할 수 있다"
+      ],
+      "effectsText": "이 기술은 발 판정 기술만 상쇄할 수 있다.",
+      "effectClauses": [],
+      "meta": {
+        "firstAppearance": "AWL-AT-051"
+      }
+    },
+    {
+      "id": "ST5-007",
+      "character": "울프",
+      "name": "스트릿 울프",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 11,
+        "onHit": 3,
+        "onGuard": -5,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①콤보 시 데미지 보정이 적용되지 않는다.②캐치 시 7속도로 사용할 수 있다. 그 경우 상대에게200데미지를 주고 이번 자신 겟 페이즈를 스킵한다.",
+      "effectClauses": [
+        {
+          "id": "ST5-007#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①콤보 시 데미지 보정이 적용되지 않는다."
+            }
+          ],
+          "raw": "①콤보 시 데미지 보정이 적용되지 않는다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST5-007#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "DEAL_DAMAGE",
+              "who": "opponent",
+              "amount": 200
+            },
+            {
+              "type": "CATCH_GENERIC",
+              "note": "②캐치 시 7속도로 사용할 수 있다.그 경우 상대에게200데미지를 주고 이번 자신 겟 페이즈를 스킵한다"
+            }
+          ],
+          "raw": "②캐치 시 7속도로 사용할 수 있다.그 경우 상대에게200데미지를 주고 이번 자신 겟 페이즈를 스킵한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-007"
+      }
+    },
+    {
+      "id": "ST1-004",
+      "character": "니아",
+      "name": "스트로킹",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "foot",
+        "raw": "하단 발"
+      },
+      "specialJudgement": "하단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "bottom"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 8,
+        "onHit": 2,
+        "onGuard": -8,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 8속도 이하만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 8속도 이하만 회피할 수 있다.",
+      "effectClauses": [],
+      "meta": {
+        "firstAppearance": "ST1-004"
+      }
+    },
+    {
+      "id": "ST1-011",
+      "character": "세츠메이",
+      "name": "스탠딩 가드",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onHit": "방어",
+        "onGuard": "방어"
+      },
+      "rules": {
+        "selfCannotBreak": true
+      },
+      "rulesText": [
+        "이 기술은 자신이 직접 브레이크할 수 없다"
+      ],
+      "effectsText": "이 기술은 자신이 직접 브레이크할 수 없다.①방어시 자신은 200데미지를 받는다.",
+      "effectClauses": [
+        {
+          "id": "ST1-011#1",
+          "label": "①",
+          "trigger": "ON_GUARD",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①방어시 자신은 200데미지를 받는다"
+            }
+          ],
+          "raw": "①방어시 자신은 200데미지를 받는다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-011"
+      }
+    },
+    {
+      "id": "UNC-AT-031",
+      "character": "울프",
+      "name": "스태틱 테리토리",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①판정 후, 데미지를 받지 않았다면 자신은 하울링 카운터 3개를 얻는다. 그 후, 이 기술을 자신의 루멘 존에 배치할 수 있으며 이하의 효과를 적용한다. -루멘 페이즈 시, 자신의 하울링 카운터가 5개라면 이 기술을 브레이크할 수 있다. 그 경우, 이번 턴 레디하는 공격 기술의 데미지+200",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-031#1",
+          "label": "①",
+          "trigger": "AFTER_JUDGEMENT",
+          "conditions": [
+            {
+              "type": "NO_DAMAGE_TAKEN"
+            }
+          ],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            },
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①판정 후, 데미지를 받지 않았다면 자신은 하울링 카운터 3개를 얻는다.그 후, 이 기술을 자신의 루멘 존에 배치할 수 있으며 이하의 효과를 적용한다.-루멘 페이즈 시, 자신의 하울링 카운터가 5개라면 이 기술을 브레이크할 수 있다.그 경우, 이번 턴 레디하는 공격 기술의 데미지+200",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-031"
+      }
+    },
+    {
+      "id": "AWL-AT-055",
+      "character": "세츠메이",
+      "name": "스매시 훅",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 6,
+        "onHit": 1,
+        "onGuard": -5,
+        "onCounter": 2
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 시, 패를 1장 버린다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-055#1",
+          "label": "①",
+          "trigger": "ON_PLAY",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "DISCARD_HAND",
+              "who": "self",
+              "count": 1
+            }
+          ],
+          "raw": "①사용 시, 패를 1장 버린다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-055"
+      }
+    },
+    {
+      "id": "AWL-AT-049",
+      "character": "세츠메이",
+      "name": "스로킥",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "foot",
+        "raw": "하단 발"
+      },
+      "specialJudgement": "상단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "top"
+        }
+      ],
+      "stats": {
+        "damage": 300,
+        "speed": 6,
+        "onHit": 1,
+        "onGuard": -4,
+        "onCounter": 2
+      },
+      "rules": {
+        "evadeMaxSpeed": 6
+      },
+      "rulesText": [
+        "이 기술은 6속도 이하 기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 6속도 이하 기술만 회피할 수 있다.",
+      "effectClauses": [],
+      "meta": {
+        "firstAppearance": "AWL-AT-049"
+      }
+    },
+    {
+      "id": "CB01-AT-006",
+      "character": "니아",
+      "name": "슈퍼 퍼펙트 지니어스",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "이 기술의 효과는 자신의 체력이 3000 이하일 경우에만 사용할 수 있다.①「오버 리밋」: 콤보 시, 얼티밋 존의 이 기술을 브레이크할 수 있다. 그 경우, 이번 턴 사이드 덱에서 [니아] 기술 1장을 콤보에 사용할 수 있으며 그 기술은 사용 후 브레이크된다.②「오버 리밋」상태가 해제될 경우, 얼티밋 존의 이 기술을 브레이크할 수 있다. 그 경우, 「오버 리밋」효과로 받는 데미지-500",
+      "effectClauses": [
+        {
+          "id": "CB01-AT-006#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [
+            {
+              "type": "HP_COMPARE",
+              "who": "self",
+              "op": "<=",
+              "value": 3000
+            }
+          ],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "이 기술의 효과는 자신의 체력이 3000 이하일 경우에만 사용할 수 있다."
+            }
+          ],
+          "raw": "이 기술의 효과는 자신의 체력이 3000 이하일 경우에만 사용할 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CB01-AT-006#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①「오버 리밋」: 콤보 시, 얼티밋 존의 이 기술을 브레이크할 수 있다.그 경우, 이번 턴 사이드 덱에서 [니아] 기술 1장을 콤보에 사용할 수 있으며 그 기술은 사용 후 브레이크된다.",
+          "impl": "ok"
+        },
+        {
+          "id": "CB01-AT-006#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "②「오버 리밋」상태가 해제될 경우, 얼티밋 존의 이 기술을 브레이크할 수 있다.그 경우, 「오버 리밋」효과로 받는 데미지-500",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CB01-AT-006"
+      }
+    },
+    {
+      "id": "ST1-018",
+      "character": "세츠메이",
+      "name": "세츠메이 킥",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "foot",
+        "raw": "중단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 8,
+        "onHit": "콤보",
+        "onGuard": -8,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 후 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "ST1-018#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①사용 후 이 기술을 브레이크한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-018"
+      }
+    },
+    {
+      "id": "UNC-AT-051",
+      "character": "세츠메이",
+      "name": "세츠메이 롤링",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": null,
+        "raw": "하단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 13,
+        "onHit": 5,
+        "onGuard": -7,
+        "onCounter": 7
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①판정 전, 상대 기술 판정에 <회피>가 없을 경우 이 기술의 데미지+200 ②콤보 시, 4콤보에 사용했다면 이 기술의 데미지+200",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-051#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "①판정 전, 상대 기술 판정에 <회피>가 없을 경우 이 기술의 데미지+200",
+          "impl": "ok"
+        },
+        {
+          "id": "UNC-AT-051#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "②콤보 시, 4콤보에 사용했다면 이 기술의 데미지+200",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-051"
+      }
+    },
+    {
+      "id": "ST3-018",
+      "character": "세츠메이",
+      "name": "세츠 슬래시",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 9,
+        "onHit": "콤보",
+        "onGuard": -8,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시 이 기술 데미지+100",
+      "effectClauses": [
+        {
+          "id": "ST3-018#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "①카운터 시 이 기술 데미지+100",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST3-018"
+      }
+    },
+    {
+      "id": "PMP-AT-049",
+      "character": "세츠메이",
+      "name": "샤프 마인드",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [
+        "이 기술은 덱에 3장까지 넣을 수 있다"
+      ],
+      "effectsText": "이 기술은 덱에 3장까지 넣을 수 있다.게임 시작 시, 사이드 덱에서 루멘 존에 배치한다.①리커버리 페이즈 시, 패 1장을 버리고 루멘 존의 이 기술을 브레이크할 수 있다. 그 경우 서로의 패를 보여주고 자신의 FP가 불리할 경우 자신은 1FP를 얻는다. 이 효과는 자신의 체력이 4000 이하일 때만 사용할 수 있다.",
+      "effectClauses": [
+        {
+          "id": "PMP-AT-049#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "게임 시작 시, 사이드 덱에서 루멘 존에 배치한다."
+            }
+          ],
+          "raw": "게임 시작 시, 사이드 덱에서 루멘 존에 배치한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "PMP-AT-049#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [
+            {
+              "type": "HP_COMPARE",
+              "who": "self",
+              "op": "<=",
+              "value": 4000
+            }
+          ],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 1
+            },
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①리커버리 페이즈 시, 패 1장을 버리고 루멘 존의 이 기술을 브레이크할 수 있다.그 경우 서로의 패를 보여주고 자신의 FP가 불리할 경우 자신은 1FP를 얻는다.이 효과는 자신의 체력이 4000 이하일 때만 사용할 수 있다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "PMP-AT-049"
+      }
+    },
+    {
+      "id": "PMP-AT-026",
+      "character": "울프",
+      "name": "새비지 블레이드",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 9,
+        "onHit": "콤보",
+        "onGuard": -9,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 시, 이번 턴 【하울링】카운터를 얻을 수 없다.②히트 및 카운터 시, 【하울링】카운터를 모두 제거한다.3개 이상 제거했을 경우 이번 턴 종료 시까지 자신에게 「위압」상태를 부여한다.③「위압」: 사용 후, 이번 턴 자신은 <12속도 이상>기술을 사용할 수 없으며 이번 턴 종료 시까지 <[울프] 손>판정 기술 데미지+100",
+      "effectClauses": [
+        {
+          "id": "PMP-AT-026#1",
+          "label": "①",
+          "trigger": "ON_PLAY",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①사용 시, 이번 턴 【하울링】카운터를 얻을 수 없다."
+            }
+          ],
+          "raw": "①사용 시, 이번 턴 【하울링】카운터를 얻을 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "PMP-AT-026#2",
+          "label": "②",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②히트 및 카운터 시, 【하울링】카운터를 모두 제거한다.3개 이상 제거했을 경우 이번 턴 종료 시까지 자신에게 「위압」상태를 부여한다."
+            }
+          ],
+          "raw": "②히트 및 카운터 시, 【하울링】카운터를 모두 제거한다.3개 이상 제거했을 경우 이번 턴 종료 시까지 자신에게 「위압」상태를 부여한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "PMP-AT-026#3",
+          "label": "③",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "③「위압」: 사용 후, 이번 턴 자신은 <12속도 이상>기술을 사용할 수 없으며 이번 턴 종료 시까지 <[울프] 손>판정 기술 데미지+100",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "PMP-AT-026"
+      }
+    },
+    {
+      "id": "CB01-AT-016",
+      "character": "울프",
+      "name": "사냥 개시",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①이 기술이 얼티밋 존에 있는 동안 이하의 효과를 적용한다. 루멘 페이즈 시, 임의의 하울링카운터를 제거할 수 있다.그 경우, 제거한 카운터 1개당 상대는 1FP를 잃는다.②루멘 페이즈 시, 자신의 체력이 2500 이하일 경우 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "CB01-AT-016#1",
+          "label": "①",
+          "trigger": "ON_LUMEN_PHASE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①이 기술이 얼티밋 존에 있는 동안 이하의 효과를 적용한다.루멘 페이즈 시, 임의의 하울링카운터를 제거할 수 있다.그 경우, 제거한 카운터 1개당 상대는 1FP를 잃는다."
+            }
+          ],
+          "raw": "①이 기술이 얼티밋 존에 있는 동안 이하의 효과를 적용한다.루멘 페이즈 시, 임의의 하울링카운터를 제거할 수 있다.그 경우, 제거한 카운터 1개당 상대는 1FP를 잃는다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CB01-AT-016#2",
+          "label": "②",
+          "trigger": "ON_LUMEN_PHASE",
+          "conditions": [
+            {
+              "type": "HP_COMPARE",
+              "who": "self",
+              "op": "<=",
+              "value": 2500
+            }
+          ],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "②루멘 페이즈 시, 자신의 체력이 2500 이하일 경우 이 기술을 브레이크한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CB01-AT-016"
+      }
+    },
+    {
+      "id": "UNC-AT-033",
+      "character": "울프",
+      "name": "브루탈 서지",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 8,
+        "onHit": 4,
+        "onGuard": -7,
+        "onCounter": 5
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시, 상대에게 200데미지를 준다. ②콤보 시, [손 판정] 기술 뒤에 이을 경우 이 기술의 데미지+100 ③「위압」: 콤보 시, 11속도로 사용할 수 있다. 그 경우, 이 기술의 데미지+100",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-033#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①카운터 시, 상대에게 200데미지를 준다."
+            }
+          ],
+          "raw": "①카운터 시, 상대에게 200데미지를 준다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-033#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "②콤보 시, [손 판정] 기술 뒤에 이을 경우 이 기술의 데미지+100",
+          "impl": "ok"
+        },
+        {
+          "id": "UNC-AT-033#3",
+          "label": "③",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "③「위압」: 콤보 시, 11속도로 사용할 수 있다.그 경우, 이 기술의 데미지+100",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-033"
+      }
+    },
+    {
+      "id": "ST1-006",
+      "character": "니아",
+      "name": "버스트 레이",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": null,
+        "raw": "상단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 10,
+        "onHit": 2,
+        "onGuard": -3,
+        "onCounter": 2
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①판정 전 상대에게 특수 판정이 있을 경우 이하의 효과가 추가된다.-이 기술은 속도가 고정되며 상대는 이 기술을 회피 및 상쇄할 수 없다.",
+      "effectClauses": [
+        {
+          "id": "ST1-006#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①판정 전 상대에게 특수 판정이 있을 경우 이하의 효과가 추가된다.-이 기술은 속도가 고정되며 상대는 이 기술을 회피 및 상쇄할 수 없다"
+            }
+          ],
+          "raw": "①판정 전 상대에게 특수 판정이 있을 경우 이하의 효과가 추가된다.-이 기술은 속도가 고정되며 상대는 이 기술을 회피 및 상쇄할 수 없다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-006"
+      }
+    },
+    {
+      "id": "AWL-AT-046",
+      "character": "세츠메이",
+      "name": "백스텝",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onHit": "회피",
+        "onGuard": "회피",
+        "onCounter": "회피"
+      },
+      "rules": {
+        "evadeMaxSpeed": 6
+      },
+      "rulesText": [
+        "이 기술은 6속도 이하 기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 6속도 이하 기술만 회피할 수 있다. ①자신의 회피 시, 상대 기술 속도 -1만큼 FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-046#1",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP_FROM_OPP_SPEED",
+              "who": "self",
+              "minus": 1,
+              "max": 9
+            }
+          ],
+          "raw": "①자신의 회피 시, 상대 기술 속도 -1만큼 FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-046"
+      }
+    },
+    {
+      "id": "LMI-AT-053",
+      "character": "세츠메이",
+      "name": "바이퍼 어썰트",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "foot",
+        "raw": "하단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 300,
+        "speed": 6,
+        "onHit": 2,
+        "onGuard": -4,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 시, 자신의 FP가 <+3>이상인 경우 이 기술의 가드 판정을 <-2>로 변경한다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-053#1",
+          "label": "①",
+          "trigger": "ON_PLAY",
+          "conditions": [
+            {
+              "type": "FP_COMPARE",
+              "who": "self",
+              "op": ">=",
+              "value": 3
+            }
+          ],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "onGuard",
+              "op": "SET",
+              "value": -2
+            }
+          ],
+          "raw": "①사용 시, 자신의 FP가 <+3>이상인 경우 이 기술의 가드 판정을 <-2>로 변경한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-053"
+      }
+    },
+    {
+      "id": "AWL-AT-047",
+      "character": "세츠메이",
+      "name": "메이슈트",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "foot",
+        "raw": "상단 발"
+      },
+      "specialJudgement": "하단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "bottom"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 11,
+        "onHit": 3,
+        "onGuard": -7,
+        "onCounter": "콤보"
+      },
+      "rules": {
+        "evadeMaxSpeed": 7
+      },
+      "rulesText": [
+        "이 기술은 7속도 이하 기술만 회피할 수 있다"
+      ],
+      "effectsText": "이 기술은 7속도 이하 기술만 회피할 수 있다.",
+      "effectClauses": [],
+      "meta": {
+        "firstAppearance": "AWL-AT-047"
+      }
+    },
+    {
+      "id": "UNC-AT-049",
+      "character": "세츠메이",
+      "name": "메이 슬라이드",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": null,
+        "raw": "하단"
+      },
+      "specialJudgement": "상단 회피",
+      "specials": [
+        {
+          "type": "evade",
+          "height": "top"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 10,
+        "onHit": 5,
+        "onGuard": -7,
+        "onCounter": 6
+      },
+      "rules": {
+        "evadeMaxSpeed": 7
+      },
+      "rulesText": [
+        "이 기술은 7속도 이하 기술만 회피할 수 있다",
+        "이 기술은 콤보에 사용할 수 없다"
+      ],
+      "effectsText": "이 기술은 7속도 이하 기술만 회피할 수 있다. 이 기술은 콤보에 사용할 수 없다. ①자신의 회피 시, 상대는 1FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-049#1",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 1
+            }
+          ],
+          "raw": "①자신의 회피 시, 상대는 1FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-049"
+      }
+    },
+    {
+      "id": "UNC-AT-050",
+      "character": "세츠메이",
+      "name": "롤링 스피너",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "foot",
+        "raw": "상단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 12,
+        "onHit": "콤보",
+        "onGuard": 2,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①히트 시, 이 기술의 데미지+100 ②캐치 시, 9속도로 사용할 수 있다. 그 경우, 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-050#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "①히트 시, 이 기술의 데미지+100",
+          "impl": "ok"
+        },
+        {
+          "id": "UNC-AT-050#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            },
+            {
+              "type": "CATCH_GENERIC",
+              "note": "②캐치 시, 9속도로 사용할 수 있다.그 경우, 이 기술을 브레이크한다"
+            }
+          ],
+          "raw": "②캐치 시, 9속도로 사용할 수 있다.그 경우, 이 기술을 브레이크한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-050"
+      }
+    },
+    {
+      "id": "AWL-AT-048",
+      "character": "세츠메이",
+      "name": "로우킥",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "foot",
+        "raw": "하단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 300,
+        "speed": 5,
+        "onHit": 1,
+        "onGuard": -4,
+        "onCounter": 1
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "",
+      "effectClauses": [],
+      "meta": {
+        "firstAppearance": "AWL-AT-048"
+      }
+    },
+    {
+      "id": "AWL-AT-050",
+      "character": "세츠메이",
+      "name": "렌딩 대거",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "상단 상쇄",
+      "specials": [
+        {
+          "type": "clash",
+          "height": "top"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 8,
+        "onHit": 4,
+        "onGuard": -4,
+        "onCounter": 5
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 손 판정 기술만 상쇄할 수 있다"
+      ],
+      "effectsText": "이 기술은 손 판정 기술만 상쇄할 수 있다. ①상쇄 시, 상대에게 100데미지를 준다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-050#1",
+          "label": "①",
+          "trigger": "ON_CLASH",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①상쇄 시, 상대에게 100데미지를 준다"
+            }
+          ],
+          "raw": "①상쇄 시, 상대에게 100데미지를 준다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-050"
+      }
+    },
+    {
+      "id": "ST1-008",
+      "character": "니아",
+      "name": "레피! 파이어!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": null,
+        "raw": "하단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 600,
+        "speed": 12,
+        "onHit": 5,
+        "onGuard": -6,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①「오버 리밋」: 판정 전 자신은 5FP를 얻는다.②콤보 시 속도 관계없이 `라이!`명이 들어간 기술 다음으로 이을 수 있다.",
+      "effectClauses": [
+        {
+          "id": "ST1-008#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 5
+            }
+          ],
+          "raw": "①「오버 리밋」: 판정 전 자신은 5FP를 얻는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "ST1-008#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시 속도 관계없이 `라이!`명이 들어간 기술 다음으로 이을 수 있다"
+            }
+          ],
+          "raw": "②콤보 시 속도 관계없이 `라이!`명이 들어간 기술 다음으로 이을 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-008"
+      }
+    },
+    {
+      "id": "AWL-AT-013",
+      "character": "니아",
+      "name": "레피! 스크류!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 8,
+        "onHit": "콤보",
+        "onGuard": -9,
+        "onCounter": "콤보"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①콤보 시, 이 기술이 1콤보라면 이하의 효과를 적용한다. -콤보 시, 이 기술을 브레이크한다. -이번 턴, 자신은 3콤보까지만 이을 수 있다. ②콤보 시, 속도와 관계없이 `라이!`명을 가진 기술 뒤에 이을 수 있다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-013#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①콤보 시, 이 기술이 1콤보라면 이하의 효과를 적용한다.-콤보 시, 이 기술을 브레이크한다.-이번 턴, 자신은 3콤보까지만 이을 수 있다.",
+          "impl": "ok"
+        },
+        {
+          "id": "AWL-AT-013#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 속도와 관계없이 `라이!`명을 가진 기술 뒤에 이을 수 있다"
+            }
+          ],
+          "raw": "②콤보 시, 속도와 관계없이 `라이!`명을 가진 기술 뒤에 이을 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-013"
+      }
+    },
+    {
+      "id": "UNC-AT-012",
+      "character": "니아",
+      "name": "레피! 드릴!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": null,
+        "raw": "중단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 100,
+        "speed": 9,
+        "onHit": 3,
+        "onGuard": -7,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①판정 전, 자신의 루멘 존의 기술 1장당 이 기술의 데미지+100(최대 +500) ②콤보 시, 속도에 관계없이 `라이!`명이 들어간 기술 다음으로 이을 수 있다. ③「오버 리밋」: 이 기술이 방어되었을 경우, 브레이크된 자신의 기술 1장당 100의 데미지를 상대에게 준다.(최대 300데미지)",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-012#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "①판정 전, 자신의 루멘 존의 기술 1장당 이 기술의 데미지+100(최대 +500)",
+          "impl": "ok"
+        },
+        {
+          "id": "UNC-AT-012#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 속도에 관계없이 `라이!`명이 들어간 기술 다음으로 이을 수 있다."
+            }
+          ],
+          "raw": "②콤보 시, 속도에 관계없이 `라이!`명이 들어간 기술 다음으로 이을 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-012#3",
+          "label": "③",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "③「오버 리밋」: 이 기술이 방어되었을 경우, 브레이크된 자신의 기술 1장당 100의 데미지를 상대에게 준다.(최대 300데미지)"
+            }
+          ],
+          "raw": "③「오버 리밋」: 이 기술이 방어되었을 경우, 브레이크된 자신의 기술 1장당 100의 데미지를 상대에게 준다.(최대 300데미지)",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-012"
+      }
+    },
+    {
+      "id": "LMI-AT-028",
+      "character": "울프",
+      "name": "레이 바즈라",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": null,
+        "raw": "하단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 10,
+        "onHit": 3,
+        "onGuard": -7,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①상대의 방어 시, 상대에게 200데미지를 주고 이 기술을 리스트로 보낸다. 그 후, 이번 턴 겟 페이즈에서 이 기술을 가져올 수 없다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-028#1",
+          "label": "①",
+          "trigger": "ON_GUARD",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "DEAL_DAMAGE",
+              "who": "opponent",
+              "amount": 200
+            }
+          ],
+          "raw": "①상대의 방어 시, 상대에게 200데미지를 주고 이 기술을 리스트로 보낸다.그 후, 이번 턴 겟 페이즈에서 이 기술을 가져올 수 없다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-028"
+      }
+    },
+    {
+      "id": "ST1-001",
+      "character": "니아",
+      "name": "랩 캐츠",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "foot",
+        "raw": "하단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 5,
+        "onHit": 2,
+        "onGuard": -5,
+        "onCounter": 1
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 후 「오버 리밋」 상태가 아니라면 리스트에서 기술 1장을 루멘 존으로 이동한다.②「오버 리밋」: 사용 후 루멘 존에 있는 앞면 기술 1장을 리스트로 이동한다.",
+      "effectClauses": [
+        {
+          "id": "ST1-001#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①사용 후 「오버 리밋」 상태가 아니라면 리스트에서 기술 1장을 루멘 존으로 이동한다."
+            }
+          ],
+          "raw": "①사용 후 「오버 리밋」 상태가 아니라면 리스트에서 기술 1장을 루멘 존으로 이동한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-001#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②「오버 리밋」: 사용 후 루멘 존에 있는 앞면 기술 1장을 리스트로 이동한다"
+            }
+          ],
+          "raw": "②「오버 리밋」: 사용 후 루멘 존에 있는 앞면 기술 1장을 리스트로 이동한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-001"
+      }
+    },
+    {
+      "id": "CRS-AT-053",
+      "character": "세츠메이",
+      "name": "래피드 닷지",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onGuard": "회피"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①회피 시, 상대 기술 속도만큼 FP를 얻는다.②사용 후, 이번 턴 콤보 타임 시 자신은 3콤보까지만 이을 수 있다.",
+      "effectClauses": [
+        {
+          "id": "CRS-AT-053#1",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①회피 시, 상대 기술 속도만큼 FP를 얻는다."
+            }
+          ],
+          "raw": "①회피 시, 상대 기술 속도만큼 FP를 얻는다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CRS-AT-053#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②사용 후, 이번 턴 콤보 타임 시 자신은 3콤보까지만 이을 수 있다"
+            }
+          ],
+          "raw": "②사용 후, 이번 턴 콤보 타임 시 자신은 3콤보까지만 이을 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CRS-AT-053"
+      }
+    },
+    {
+      "id": "LMI-AT-027",
+      "character": "울프",
+      "name": "라이트닝 라스",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": null,
+        "raw": "상단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 100,
+        "speed": 1,
+        "onHit": 8,
+        "onGuard": -10,
+        "onCounter": 8
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 「위압」상태이거나 【하울링】카운터 5개를 제거해야만 사용할 수 있다"
+      ],
+      "effectsText": "이 기술은 「위압」상태이거나 【하울링】카운터 5개를 제거해야만 사용할 수 있다. 이 기술로는 캐치할 수 없다. ①사용 시, 상대의 체력에 따라 이하의 효과들을 적용한다. -3000이하: 이 기술 데미지+200 -2000이하: 상대는 이 기술을 회피할 수 없다. -1000이하: 이 기술 데미지+300 ②사용 후, 배틀 페이즈 종료 시 【하울링】카운터를 모두 제거한다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-027#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "CATCH_GENERIC",
+              "note": "이 기술로는 캐치할 수 없다."
+            }
+          ],
+          "raw": "이 기술로는 캐치할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "LMI-AT-027#2",
+          "label": "①",
+          "trigger": "ON_PLAY",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "①사용 시, 상대의 체력에 따라 이하의 효과들을 적용한다.-3000이하: 이 기술 데미지+200 -2000이하: 상대는 이 기술을 회피할 수 없다.-1000이하: 이 기술 데미지+300",
+          "impl": "ok"
+        },
+        {
+          "id": "LMI-AT-027#3",
+          "label": "②",
+          "trigger": "ON_BATTLE_END",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②사용 후, 배틀 페이즈 종료 시 【하울링】카운터를 모두 제거한다"
+            }
+          ],
+          "raw": "②사용 후, 배틀 페이즈 종료 시 【하울링】카운터를 모두 제거한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-027"
+      }
+    },
+    {
+      "id": "ST1-005",
+      "character": "니아",
+      "name": "라이! 촙!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "hand",
+        "raw": "중단 손"
+      },
+      "specialJudgement": "중단 상쇄",
+      "specials": [
+        {
+          "type": "clash",
+          "height": "mid"
+        }
+      ],
+      "stats": {
+        "damage": 500,
+        "speed": 9,
+        "onHit": "콤보",
+        "onGuard": -7,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 발 판정만 상쇄할 수 있다"
+      ],
+      "effectsText": "이 기술은 발 판정만 상쇄할 수 있다.①콤보 시 속도에 관계없이 `레피!`명이 들어간 기술 다음으로 이을 수 있다.②「오버 리밋」: 콤보 시 루멘 존에 있는 기술 1장을 브레이크 후 리스트에서 기술 1장을 획득한다.",
+      "effectClauses": [
+        {
+          "id": "ST1-005#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①콤보 시 속도에 관계없이 `레피!`명이 들어간 기술 다음으로 이을 수 있다."
+            }
+          ],
+          "raw": "①콤보 시 속도에 관계없이 `레피!`명이 들어간 기술 다음으로 이을 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-005#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②「오버 리밋」: 콤보 시 루멘 존에 있는 기술 1장을 브레이크 후 리스트에서 기술 1장을 획득한다"
+            }
+          ],
+          "raw": "②「오버 리밋」: 콤보 시 루멘 존에 있는 기술 1장을 브레이크 후 리스트에서 기술 1장을 획득한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-005"
+      }
+    },
+    {
+      "id": "ST1-003",
+      "character": "니아",
+      "name": "라이! 바운스!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 7,
+        "onHit": 3,
+        "onGuard": -4,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 손 판정만 상쇄할 수 있다"
+      ],
+      "effectsText": "이 기술은 손 판정만 상쇄할 수 있다.①상쇄시 히트 판정을 <콤보>로 변경한다.②콤보 시 속도에 관계없이 `레피!` 명이 들어간 기술 다음으로 이을 수 있다.",
+      "effectClauses": [
+        {
+          "id": "ST1-003#1",
+          "label": "①",
+          "trigger": "ON_CLASH",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①상쇄시 히트 판정을 <콤보>로 변경한다."
+            }
+          ],
+          "raw": "①상쇄시 히트 판정을 <콤보>로 변경한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-003#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시 속도에 관계없이 `레피!` 명이 들어간 기술 다음으로 이을 수 있다"
+            }
+          ],
+          "raw": "②콤보 시 속도에 관계없이 `레피!` 명이 들어간 기술 다음으로 이을 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-003"
+      }
+    },
+    {
+      "id": "AWL-AT-015",
+      "character": "니아",
+      "name": "라이! 레피! 캐논!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": null,
+        "raw": "중단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 700,
+        "speed": 10,
+        "onHit": 3,
+        "onGuard": -7,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 자신 루멘 존에 공격・수비 기술이 6장 이상일 때 사용할 수 있다"
+      ],
+      "effectsText": "이 기술은 자신 루멘 존에 공격・수비 기술이 6장 이상일 때 사용할 수 있다. 상대는 이 기술을 상쇄할 수 없다. ①히트 및 카운터 시, 자신의 루멘 존에 있는 중립 기술을 전부 리스트로 보낸다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-015#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 상쇄할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 상쇄할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "AWL-AT-015#2",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①히트 및 카운터 시, 자신의 루멘 존에 있는 중립 기술을 전부 리스트로 보낸다"
+            }
+          ],
+          "raw": "①히트 및 카운터 시, 자신의 루멘 존에 있는 중립 기술을 전부 리스트로 보낸다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-015"
+      }
+    },
+    {
+      "id": "PMP-AT-013",
+      "character": "니아",
+      "name": "라이! 레피! 블래스트!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": null,
+        "raw": "상단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 300,
+        "speed": 13,
+        "onHit": "콤보",
+        "onGuard": -8,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "루멘 존의 카드 4장당 이 기술 데미지+200①루멘 존의 카드가 7장 이상일 경우 이 기술은 <6속도 이하 상단 상쇄> 특수 판정을 추가한다.②콤보 시, 속도를 무시하고 \"라이!\" 혹은 \"레피!\" 명이 들어간 기술 다음으로 이을 수 있다. 그 경우, 루멘 존의 [니아] 기술 1장당 자신은 100 데미지를 받는다.",
+      "effectClauses": [
+        {
+          "id": "PMP-AT-013#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "루멘 존의 카드 4장당 이 기술 데미지+200",
+          "impl": "ok"
+        },
+        {
+          "id": "PMP-AT-013#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①루멘 존의 카드가 7장 이상일 경우 이 기술은 <6속도 이하 상단 상쇄> 특수 판정을 추가한다."
+            }
+          ],
+          "raw": "①루멘 존의 카드가 7장 이상일 경우 이 기술은 <6속도 이하 상단 상쇄> 특수 판정을 추가한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "PMP-AT-013#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 속도를 무시하고 \"라이!\" 혹은 \"레피!\" 명이 들어간 기술 다음으로 이을 수 있다.그 경우, 루멘 존의 [니아] 기술 1장당 자신은 100 데미지를 받는다"
+            }
+          ],
+          "raw": "②콤보 시, 속도를 무시하고 \"라이!\" 혹은 \"레피!\" 명이 들어간 기술 다음으로 이을 수 있다.그 경우, 루멘 존의 [니아] 기술 1장당 자신은 100 데미지를 받는다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "PMP-AT-013"
+      }
+    },
+    {
+      "id": "ST1-007",
+      "character": "니아",
+      "name": "라이! 레피! 봄버!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": null,
+        "raw": "중단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 600,
+        "speed": 11,
+        "onHit": 4,
+        "onGuard": -7,
+        "onCounter": 7
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①콤보 시 이 기술을 리스트에서 사용할 수 있다. 그 경우 루멘 존에 있는 기술 1장당 200 데미지를 받는다.②「오버 리밋」: 콤보 시 데미지 보정이 적용되지 않는다.",
+      "effectClauses": [
+        {
+          "id": "ST1-007#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①콤보 시 이 기술을 리스트에서 사용할 수 있다.그 경우 루멘 존에 있는 기술 1장당 200 데미지를 받는다."
+            }
+          ],
+          "raw": "①콤보 시 이 기술을 리스트에서 사용할 수 있다.그 경우 루멘 존에 있는 기술 1장당 200 데미지를 받는다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-007#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②「오버 리밋」: 콤보 시 데미지 보정이 적용되지 않는다"
+            }
+          ],
+          "raw": "②「오버 리밋」: 콤보 시 데미지 보정이 적용되지 않는다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-007"
+      }
+    },
+    {
+      "id": "ST1-009",
+      "character": "니아",
+      "name": "라이! 레피! 로켓!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": null,
+        "raw": "상단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 1200,
+        "speed": 13,
+        "onHit": 3,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상대는 이 기술을 방어 및 상쇄할 수 없다.①상대 카운터 시 상대는 4FP를 얻는다.②콤보 시 3콤보 후 사용할 수 있으며 기술 데미지 -400③「오버 리밋」: 사용 후 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "ST1-009#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 방어 및 상쇄할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-009#2",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 4
+            }
+          ],
+          "raw": "①상대 카운터 시 상대는 4FP를 얻는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "ST1-009#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시 3콤보 후 사용할 수 있으며 기술 데미지 -400"
+            }
+          ],
+          "raw": "②콤보 시 3콤보 후 사용할 수 있으며 기술 데미지 -400",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-009#4",
+          "label": "③",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "③「오버 리밋」: 사용 후 이 기술을 브레이크한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-009"
+      }
+    },
+    {
+      "id": "LMI-AT-012",
+      "character": "니아",
+      "name": "라이! 레피! 러시!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": null,
+        "raw": "상단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 300,
+        "speed": 10,
+        "onHit": "콤보",
+        "onGuard": -5,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 루멘 존에서 브레이크할 수 없다"
+      ],
+      "effectsText": "이 기술은 루멘 존에서 브레이크할 수 없다. ①사용 시, 자신의 패나 리스트에서 기술 1장을 루멘 존에 보낼 수 있다. ②「오버 리밋」: 자신의 루멘 존의 기술 3장당 이 기술 데미지+100 ③판정 전, 자신의 루멘 존의 기술 3장당 2FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-012#1",
+          "label": "①",
+          "trigger": "ON_PLAY",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①사용 시, 자신의 패나 리스트에서 기술 1장을 루멘 존에 보낼 수 있다."
+            }
+          ],
+          "raw": "①사용 시, 자신의 패나 리스트에서 기술 1장을 루멘 존에 보낼 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "LMI-AT-012#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "②「오버 리밋」: 자신의 루멘 존의 기술 3장당 이 기술 데미지+100",
+          "impl": "ok"
+        },
+        {
+          "id": "LMI-AT-012#3",
+          "label": "③",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 2
+            }
+          ],
+          "raw": "③판정 전, 자신의 루멘 존의 기술 3장당 2FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-012"
+      }
+    },
+    {
+      "id": "CB01-AT-008",
+      "character": "니아",
+      "name": "라이! 개틀링!",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": null,
+        "raw": "중단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 10,
+        "onHit": 3,
+        "onGuard": -3,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①사용 시, 「오버 리밋」상태가 아닐 경우 리스트에서 3장까지 루멘 존으로 보낼 수 있다. 3장을 보냈을 경우, 이 기술 데미지+100②「오버 리밋」: 히트 및 카운터 시, 루멘 존의 기술 3장을 사이드 덱으로 보낼 수 있다. 그 경우, 사용 후 이 기술을 브레이크한다.",
+      "effectClauses": [
+        {
+          "id": "CB01-AT-008#1",
+          "label": "①",
+          "trigger": "ON_PLAY",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "①사용 시, 「오버 리밋」상태가 아닐 경우 리스트에서 3장까지 루멘 존으로 보낼 수 있다.3장을 보냈을 경우, 이 기술 데미지+100",
+          "impl": "ok"
+        },
+        {
+          "id": "CB01-AT-008#2",
+          "label": "②",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "②「오버 리밋」: 히트 및 카운터 시, 루멘 존의 기술 3장을 사이드 덱으로 보낼 수 있다.그 경우, 사용 후 이 기술을 브레이크한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CB01-AT-008"
+      }
+    },
+    {
+      "id": "CRS-AT-054",
+      "character": "세츠메이",
+      "name": "드리프트 컨버전",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {
+        "deckLimit": 3
+      },
+      "rulesText": [
+        "이 기술은 3장까지 덱에 넣을 수 있다"
+      ],
+      "effectsText": "이 기술은 3장까지 덱에 넣을 수 있다.①콤보 시, 사이드 덱에서 이 기술을 브레이크할 수 있다.(사이드 덱에서 브레이크할 경우, 사이드 덱에서 리스트로 카드를 놓지 않는다.)그 경우, 3콤보 기술을 속도를 무시하고 패에서 1장 이을 수 있다.그 기술의 사용 후, 콤보 타임을 종료한다.",
+      "effectClauses": [
+        {
+          "id": "CRS-AT-054#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①콤보 시, 사이드 덱에서 이 기술을 브레이크할 수 있다.(사이드 덱에서 브레이크할 경우, 사이드 덱에서 리스트로 카드를 놓지 않는다.)그 경우, 3콤보 기술을 속도를 무시하고 패에서 1장 이을 수 있다.그 기술의 사용 후, 콤보 타임을 종료한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CRS-AT-054"
+      }
+    },
+    {
+      "id": "ST5-002",
+      "character": "울프",
+      "name": "헌팅 헤드",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "그랩",
+      "specials": [
+        {
+          "type": "grab"
+        }
+      ],
+      "stats": {
+        "damage": 400,
+        "speed": 6,
+        "onHit": 1,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상대는 이 기술을 방어할 수 없다.①이 기술이 무효 및 회피된다면 상대는 5FP를 얻는다.②「위압」 : 콤보 시 10속도로 사용할 수 있다.그 경우 이 기술 데미지+200",
+      "effectClauses": [
+        {
+          "id": "ST5-002#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 방어할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 방어할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST5-002#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 5
+            }
+          ],
+          "raw": "①이 기술이 무효 및 회피된다면 상대는 5FP를 얻는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "ST5-002#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 200
+            }
+          ],
+          "raw": "②「위압」 : 콤보 시 10속도로 사용할 수 있다.그 경우 이 기술 데미지+200",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-002"
+      }
+    },
+    {
+      "id": "ST5-008",
+      "character": "울프",
+      "name": "데미스 엔드",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": null,
+        "raw": "하단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 600,
+        "speed": 12,
+        "onHit": 4,
+        "onGuard": -7,
+        "onCounter": 6
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상대는 이 기술을 회피할 수 없다.①히트 시 배틀 페이즈 후 다시 레디 페이즈를 진행한다.만약 「위압」중이라면 이 기술을 리스트로 보낸다.②콤보 시 속도에 관계없이 하단 판정 기술 뒤에사용할 수 있다. 그 경우 이 기술 데미지-100",
+      "effectClauses": [
+        {
+          "id": "ST5-008#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 회피할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 회피할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST5-008#2",
+          "label": "①",
+          "trigger": "ON_READY_PHASE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①히트 시 배틀 페이즈 후 다시 레디 페이즈를 진행한다.만약 「위압」중이라면 이 기술을 리스트로 보낸다."
+            }
+          ],
+          "raw": "①히트 시 배틀 페이즈 후 다시 레디 페이즈를 진행한다.만약 「위압」중이라면 이 기술을 리스트로 보낸다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST5-008#3",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시 속도에 관계없이 하단 판정 기술 뒤에사용할 수 있다.그 경우 이 기술 데미지-100"
+            }
+          ],
+          "raw": "②콤보 시 속도에 관계없이 하단 판정 기술 뒤에사용할 수 있다.그 경우 이 기술 데미지-100",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-008"
+      }
+    },
+    {
+      "id": "UNC-AT-032",
+      "character": "울프",
+      "name": "데들리 스파크",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": null,
+        "raw": "하단"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 6,
+        "onHit": 2,
+        "onGuard": -4,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①히트 시, 자신의 리스트에서 1장을 브레이크한다. ②콤보 시, 속도에 관계없이 [울프 중단 기술]을 이 기술 다음에 이을 수 있다.",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-032#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①히트 시, 자신의 리스트에서 1장을 브레이크한다."
+            }
+          ],
+          "raw": "①히트 시, 자신의 리스트에서 1장을 브레이크한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "UNC-AT-032#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 속도에 관계없이 [울프 중단 기술]을 이 기술 다음에 이을 수 있다"
+            }
+          ],
+          "raw": "②콤보 시, 속도에 관계없이 [울프 중단 기술]을 이 기술 다음에 이을 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-032"
+      }
+    },
+    {
+      "id": "CRS-AT-033",
+      "character": "울프",
+      "name": "데드네우스",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 100,
+        "speed": 9,
+        "onHit": 5,
+        "onGuard": -5,
+        "onCounter": 5
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①카운터 시, 이 기술 데미지+400②콤보 시, 이 기술은 데미지 보정이 적용되지 않는다.③「위압」: 콤보 시, 이 기술 앞에 사용한 [울프] 기술 1장당 상대에게 100데미지를 준다.(최대 300)그 후, 콤보 타임을 종료한다.",
+      "effectClauses": [
+        {
+          "id": "CRS-AT-033#1",
+          "label": "①",
+          "trigger": "ON_COUNTER",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 400
+            }
+          ],
+          "raw": "①카운터 시, 이 기술 데미지+400",
+          "impl": "ok"
+        },
+        {
+          "id": "CRS-AT-033#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②콤보 시, 이 기술은 데미지 보정이 적용되지 않는다."
+            }
+          ],
+          "raw": "②콤보 시, 이 기술은 데미지 보정이 적용되지 않는다.",
+          "impl": "todo"
+        },
+        {
+          "id": "CRS-AT-033#3",
+          "label": "③",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "③「위압」: 콤보 시, 이 기술 앞에 사용한 [울프] 기술 1장당 상대에게 100데미지를 준다.(최대 300)그 후, 콤보 타임을 종료한다"
+            }
+          ],
+          "raw": "③「위압」: 콤보 시, 이 기술 앞에 사용한 [울프] 기술 1장당 상대에게 100데미지를 준다.(최대 300)그 후, 콤보 타임을 종료한다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "CRS-AT-033"
+      }
+    },
+    {
+      "id": "ST1-015",
+      "character": "세츠메이",
+      "name": "대쉬",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①판정 후 데미지를 받지 않았다면 6FP를 얻는다.그 후 상대 배틀 존의 기술과 이 기술을 각 리스트로이동 후 레디 페이즈를 다시 진행한다.",
+      "effectClauses": [
+        {
+          "id": "ST1-015#1",
+          "label": "①",
+          "trigger": "AFTER_JUDGEMENT",
+          "conditions": [
+            {
+              "type": "NO_DAMAGE_TAKEN"
+            }
+          ],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 6
+            }
+          ],
+          "raw": "①판정 후 데미지를 받지 않았다면 6FP를 얻는다.그 후 상대 배틀 존의 기술과 이 기술을 각 리스트로이동 후 레디 페이즈를 다시 진행한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-015"
+      }
+    },
+    {
+      "id": "UNC-AT-046",
+      "character": "세츠메이",
+      "name": "대거 스윙",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 6,
+        "onHit": 2,
+        "onGuard": -2,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "",
+      "effectClauses": [],
+      "meta": {
+        "firstAppearance": "UNC-AT-046"
+      }
+    },
+    {
+      "id": "AWL-AT-036",
+      "character": "울프",
+      "name": "다이스티드",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "foot",
+        "raw": "상단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 500,
+        "speed": 7,
+        "onHit": 3,
+        "onGuard": -5,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상대는 이 기술을 상쇄할 수 없다. ①이 기술이 방어되었을 경우, 상대에게 100데미지를 준다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-036#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대는 이 기술을 상쇄할 수 없다."
+            }
+          ],
+          "raw": "상대는 이 기술을 상쇄할 수 없다.",
+          "impl": "todo"
+        },
+        {
+          "id": "AWL-AT-036#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "①이 기술이 방어되었을 경우, 상대에게 100데미지를 준다"
+            }
+          ],
+          "raw": "①이 기술이 방어되었을 경우, 상대에게 100데미지를 준다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-036"
+      }
+    },
+    {
+      "id": "ST1-017",
+      "character": "세츠메이",
+      "name": "다운 슬래쉬",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "bottom",
+        "limb": "hand",
+        "raw": "하단 손"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 7,
+        "onHit": 3,
+        "onGuard": -6,
+        "onCounter": 4
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①판정 전 상대가 수비 기술인 경우 히트 판정이<+5>로 변경되고 8속도로 고정된다.",
+      "effectClauses": [
+        {
+          "id": "ST1-017#1",
+          "label": "①",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [
+            {
+              "type": "OPP_IS_DEFENSE"
+            }
+          ],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "speed",
+              "op": "SET",
+              "value": 8
+            },
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "onHit",
+              "op": "SET",
+              "value": 5
+            }
+          ],
+          "raw": "①판정 전 상대가 수비 기술인 경우 히트 판정이<+5>로 변경되고 8속도로 고정된다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-017"
+      }
+    },
+    {
+      "id": "ST1-012",
+      "character": "세츠메이",
+      "name": "다운 가드",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onHit": "회피",
+        "onCounter": "방어"
+      },
+      "rules": {
+        "selfCannotBreak": true
+      },
+      "rulesText": [
+        "이 기술은 자신이 직접 브레이크할 수 없다"
+      ],
+      "effectsText": "이 기술은 자신이 직접 브레이크할 수 없다.①회피 시 상대 기술 속도-3 만큼 FP를 얻는다.(최대 9FP)②방어 시 자신은 200데미지를 받는다.",
+      "effectClauses": [
+        {
+          "id": "ST1-012#1",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP_FROM_OPP_SPEED",
+              "who": "self",
+              "minus": 3,
+              "max": 9
+            }
+          ],
+          "raw": "①회피 시 상대 기술 속도-3 만큼 FP를 얻는다.(최대 9FP)",
+          "impl": "ok"
+        },
+        {
+          "id": "ST1-012#2",
+          "label": "②",
+          "trigger": "ON_GUARD",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②방어 시 자신은 200데미지를 받는다"
+            }
+          ],
+          "raw": "②방어 시 자신은 200데미지를 받는다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-012"
+      }
+    },
+    {
+      "id": "ST1-010",
+      "character": "니아",
+      "name": "니야아앙",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onGuard": "방어"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "이하의 효과는 1개만 사용할 수 있다.①방어 시 루멘 존에 있는 9속도 이하 니아 기술로 캐치할 수 있다.②판정 후 데미지를 받지 않았다면 루멘 존에 있는 8속도 이하 니아 기술로 캐치할 수 있다.",
+      "effectClauses": [
+        {
+          "id": "ST1-010#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "이하의 효과는 1개만 사용할 수 있다."
+            }
+          ],
+          "raw": "이하의 효과는 1개만 사용할 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-010#2",
+          "label": "①",
+          "trigger": "ON_GUARD",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①방어 시 루멘 존에 있는 9속도 이하 니아 기술로 캐치할 수 있다."
+            }
+          ],
+          "raw": "①방어 시 루멘 존에 있는 9속도 이하 니아 기술로 캐치할 수 있다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-010#3",
+          "label": "②",
+          "trigger": "AFTER_JUDGEMENT",
+          "conditions": [
+            {
+              "type": "NO_DAMAGE_TAKEN"
+            }
+          ],
+          "actions": [
+            {
+              "type": "CATCH_GENERIC",
+              "note": "②판정 후 데미지를 받지 않았다면 루멘 존에 있는 8속도 이하 니아 기술로 캐치할 수 있다"
+            }
+          ],
+          "raw": "②판정 후 데미지를 받지 않았다면 루멘 존에 있는 8속도 이하 니아 기술로 캐치할 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-010"
+      }
+    },
+    {
+      "id": "AWL-AT-017",
+      "character": "니아",
+      "name": "니 부스팅",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "mid",
+        "limb": "foot",
+        "raw": "중단 발"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "damage": 400,
+        "speed": 5,
+        "onHit": 1,
+        "onGuard": -7,
+        "onCounter": 3
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "①캐치 시, 자신의 루멘 존의 기술 1장을 리스트로 보낸다. ②「오버 리밋」 : 사용 후, 자신의 루멘 존의 기술 1장을 사이드 덱으로 보낸다.",
+      "effectClauses": [
+        {
+          "id": "AWL-AT-017#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①캐치 시, 자신의 루멘 존의 기술 1장을 리스트로 보낸다."
+            }
+          ],
+          "raw": "①캐치 시, 자신의 루멘 존의 기술 1장을 리스트로 보낸다.",
+          "impl": "todo"
+        },
+        {
+          "id": "AWL-AT-017#2",
+          "label": "②",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "②「오버 리밋」 : 사용 후, 자신의 루멘 존의 기술 1장을 사이드 덱으로 보낸다"
+            }
+          ],
+          "raw": "②「오버 리밋」 : 사용 후, 자신의 루멘 존의 기술 1장을 사이드 덱으로 보낸다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "AWL-AT-017"
+      }
+    },
+    {
+      "id": "UNC-AT-053",
+      "character": "세츠메이",
+      "name": "기합",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "리커버리 페이즈 시, 자신의 체력이 1500 이하일 경우 사이드 덱에서 루멘 존에 배치할 수 있다. 이 카드가 루멘 존에 있는 동안 이하의 효과를 적용한다. -루멘 페이즈 시, 이번 턴 배틀 페이즈 종료까지 자신에게 「기합」상태를 부여할 수 있다. 「기합」상태의 레디 페이즈의 기술은 사용 시, 데미지+100, 속도가 1 느려진다. 「기합」상태 해제 시, 다음 턴 이 효과를 사용할 수 없다.",
+      "effectClauses": [
+        {
+          "id": "UNC-AT-053#1",
+          "label": null,
+          "trigger": "ON_PLAY",
+          "conditions": [
+            {
+              "type": "HP_COMPARE",
+              "who": "self",
+              "op": "<=",
+              "value": 1500
+            }
+          ],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "리커버리 페이즈 시, 자신의 체력이 1500 이하일 경우 사이드 덱에서 루멘 존에 배치할 수 있다.이 카드가 루멘 존에 있는 동안 이하의 효과를 적용한다.-루멘 페이즈 시, 이번 턴 배틀 페이즈 종료까지 자신에게 「기합」상태를 부여할 수 있다.「기합」상태의 레디 페이즈의 기술은 사용 시, 데미지+100, 속도가 1 느려진다.「기합」상태 해제 시, 다음 턴 이 효과를 사용할 수 없다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "UNC-AT-053"
+      }
+    },
+    {
+      "id": "LMI-AT-051",
+      "character": "세츠메이",
+      "name": "디팽잉 록",
+      "kind": "attack",
+      "judgement": {
+        "kind": "attack",
+        "height": "top",
+        "limb": "hand",
+        "raw": "상단 손"
+      },
+      "specialJudgement": "그랩",
+      "specials": [
+        {
+          "type": "grab"
+        }
+      ],
+      "stats": {
+        "damage": 400,
+        "speed": 7,
+        "onHit": 1,
+        "onCounter": 2
+      },
+      "rules": {},
+      "rulesText": [
+        "이 기술은 콤보에 사용할 수 없다"
+      ],
+      "effectsText": "이 기술은 콤보에 사용할 수 없다. ①이 기술이 그랩 무효가 되었을 경우, 상대는 5FP를 얻는다. ②판정 전, 상대 기술이 <상단 손>판정 공격 기술일 경우 자신은 2FP를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "LMI-AT-051#1",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 5
+            }
+          ],
+          "raw": "①이 기술이 그랩 무효가 되었을 경우, 상대는 5FP를 얻는다.",
+          "impl": "ok"
+        },
+        {
+          "id": "LMI-AT-051#2",
+          "label": "②",
+          "trigger": "BEFORE_JUDGEMENT",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "GAIN_FP",
+              "who": "self",
+              "amount": 2
+            }
+          ],
+          "raw": "②판정 전, 상대 기술이 <상단 손>판정 공격 기술일 경우 자신은 2FP를 얻는다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "LMI-AT-051"
+      }
+    },
+    {
+      "id": "PMP-AT-050",
+      "character": "세츠메이",
+      "name": "구사일생",
+      "kind": "special",
+      "judgement": {
+        "kind": "special",
+        "raw": "특수"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "게임 시작 시, 사이드 덱에서 루멘 존에 배치한다.①상대의 3콤보 사용 후, 패 1장을 버리고 루멘 존의 이 기술을 브레이크할 수 있다. 그 경우, 콤보 타임을 종료한다. 이 효과는 자신의 체력이 상대의 체력보다 낮을 경우에만 사용할 수 있다.",
+      "effectClauses": [
+        {
+          "id": "PMP-AT-050#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "게임 시작 시, 사이드 덱에서 루멘 존에 배치한다."
+            }
+          ],
+          "raw": "게임 시작 시, 사이드 덱에서 루멘 존에 배치한다.",
+          "impl": "todo"
+        },
+        {
+          "id": "PMP-AT-050#2",
+          "label": "①",
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "BREAK_SELF"
+            }
+          ],
+          "raw": "①상대의 3콤보 사용 후, 패 1장을 버리고 루멘 존의 이 기술을 브레이크할 수 있다.그 경우, 콤보 타임을 종료한다.이 효과는 자신의 체력이 상대의 체력보다 낮을 경우에만 사용할 수 있다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "PMP-AT-050"
+      }
+    },
+    {
+      "id": "ST1-013",
+      "character": "세츠메이",
+      "name": "구르기",
+      "kind": "defense",
+      "judgement": {
+        "kind": "defense",
+        "raw": "수비"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {
+        "onHit": "회피",
+        "onGuard": "회피"
+      },
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상단은 9 속도 이상만 회피 가능하다.중단은 8 속도 이하만 회피 가능하다.①회피시 8 속도 이하 기술을 캐치할 수 있다.",
+      "effectClauses": [
+        {
+          "id": "ST1-013#1",
+          "label": null,
+          "trigger": "PASSIVE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상단은 9 속도 이상만 회피 가능하다.중단은 8 속도 이하만 회피 가능하다."
+            }
+          ],
+          "raw": "상단은 9 속도 이상만 회피 가능하다.중단은 8 속도 이하만 회피 가능하다.",
+          "impl": "todo"
+        },
+        {
+          "id": "ST1-013#2",
+          "label": "①",
+          "trigger": "ON_EVADE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "CATCH_GENERIC",
+              "note": "①회피시 8 속도 이하 기술을 캐치할 수 있다"
+            }
+          ],
+          "raw": "①회피시 8 속도 이하 기술을 캐치할 수 있다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-013"
+      }
+    },
+    {
+      "id": "ST5-PS1",
+      "character": "울프",
+      "name": "「위압」",
+      "kind": "trait",
+      "judgement": {
+        "kind": "trait",
+        "raw": "특성"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "상대에게 데미지를 줄 때 마다 [하울링]카운터를 1개 올린다.(최대 5개)루멘 페이즈 시 [하울링]카운터가 5개일 경우 전부 소모하고자신에게 겟 페이즈 종료 시까지 「위압」상태를 부여할 수 있다.「위압 」상태 시 레디 페이즈 시에 자신은 공격 기술만 낼 수 있으며 상대는 수비 기술만 낼 수 있다.「위압」상태가 해제될 때 [하울링]카운터가 없다면 자신은 2FP 를 얻는다.",
+      "effectClauses": [
+        {
+          "id": "ST5-PS1#1",
+          "label": null,
+          "trigger": "ON_LUMEN_PHASE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "RAW_TEXT",
+              "raw": "상대에게 데미지를 줄 때 마다 [하울링]카운터를 1개 올린다.(최대 5개)루멘 페이즈 시 [하울링]카운터가 5개일 경우 전부 소모하고자신에게 겟 페이즈 종료 시까지 「위압」상태를 부여할 수 있다.「위압 」상태 시 레디 페이즈 시에 자신은 공격 기술만 낼 수 있으며 상대는 수비 기술만 낼 수 있다.「위압」상태가 해제될 때 [하울링]카운터가 없다면 자신은 2FP 를 얻는다"
+            }
+          ],
+          "raw": "상대에게 데미지를 줄 때 마다 [하울링]카운터를 1개 올린다.(최대 5개)루멘 페이즈 시 [하울링]카운터가 5개일 경우 전부 소모하고자신에게 겟 페이즈 종료 시까지 「위압」상태를 부여할 수 있다.「위압 」상태 시 레디 페이즈 시에 자신은 공격 기술만 낼 수 있으며 상대는 수비 기술만 낼 수 있다.「위압」상태가 해제될 때 [하울링]카운터가 없다면 자신은 2FP 를 얻는다",
+          "impl": "todo"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST5-PS1"
+      }
+    },
+    {
+      "id": "ST1-PS1",
+      "character": "니아",
+      "name": "「오버 리밋」",
+      "kind": "trait",
+      "judgement": {
+        "kind": "trait",
+        "raw": "특성"
+      },
+      "specialJudgement": "X",
+      "specials": [],
+      "stats": {},
+      "rules": {},
+      "rulesText": [],
+      "effectsText": "`라이!` 및 `레피!`명이 들어간 기술을 사용 후 패나 리스트에서 기술 1장을 루멘 존으로 보낸다.루멘 존에 공격·수비 기술이 4장 이상일 때 「오버 리밋」상태가 된다.「오버 리밋」시 이하의 패시브가 추가된다. 자신의 모든 니아 공격 기술 데미지+100 리커버리 페이즈 시 루멘 존에 있는 니아 기술 1장을 브레이크 하거나패나 리스트에서 기술 2장을 루멘 존으로 보낸다. 루멘 페이즈 시 루멘 존에 기술이 8장 이상이면 루멘 존 기술 1장당 100데미지를 받고공격·수비 기술을 모두 리스트로 보낸다. 그 후 자신은 2FP를 잃고 「오버 리밋」을 해제한다.",
+      "effectClauses": [
+        {
+          "id": "ST1-PS1#1",
+          "label": null,
+          "trigger": "ON_LUMEN_PHASE",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "MOD_STAT",
+              "target": "selfCard",
+              "stat": "damage",
+              "op": "ADD",
+              "value": 100
+            }
+          ],
+          "raw": "`라이!` 및 `레피!`명이 들어간 기술을 사용 후 패나 리스트에서 기술 1장을 루멘 존으로 보낸다.루멘 존에 공격·수비 기술이 4장 이상일 때 「오버 리밋」상태가 된다.「오버 리밋」시 이하의 패시브가 추가된다.자신의 모든 니아 공격 기술 데미지+100 리커버리 페이즈 시 루멘 존에 있는 니아 기술 1장을 브레이크 하거나패나 리스트에서 기술 2장을 루멘 존으로 보낸다.루멘 페이즈 시 루멘 존에 기술이 8장 이상이면 루멘 존 기술 1장당 100데미지를 받고공격·수비 기술을 모두 리스트로 보낸다.그 후 자신은 2FP를 잃고 「오버 리밋」을 해제한다",
+          "impl": "ok"
+        }
+      ],
+      "meta": {
+        "firstAppearance": "ST1-PS1"
+      }
+    }
+  ]
+}
