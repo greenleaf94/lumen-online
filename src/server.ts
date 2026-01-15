@@ -2,7 +2,7 @@ import express from "express";
 import { WebSocketServer } from "ws";
 import type WebSocket from "ws";
 import { Game } from "./engine.js";
-import { CARD_MAP, CARD_PUBLIC } from "./cards_setsumei.js";
+import { CARD_MAP } from "./cards_setsumei.js";
 import type { PlayerId } from "./types.js";
 
 type ClientMsg =
@@ -25,7 +25,6 @@ type Room = {
 const rooms = new Map<string, Room>();
 
 function safeSend(ws: WebSocket, msg: ServerMsg) {
-  // ws.OPEN 같은 상수는 인스턴스에 없을 수 있어서 숫자 1(OPEN)로 비교
   if (ws.readyState === 1) ws.send(JSON.stringify(msg));
 }
 
@@ -43,8 +42,41 @@ function assignPlayerId(room: Room): PlayerId | null {
   return null;
 }
 
+function cardUi(id: string) {
+  const c = CARD_MAP[id];
+  if (!c) return { id, name: id, type: "UNKNOWN" };
+
+  if (c.type === "ATTACK") {
+    return {
+      id: c.id,
+      name: c.name,
+      type: c.type,
+      character: c.character,
+      judge: c.judge,
+      specialJudge: c.specialJudge,
+      speed: c.speed,
+      damage: c.damage,
+      fpOnHit: c.fpOnHit,
+      fpOnGuard: c.fpOnGuard,
+      fpOnCounter: c.fpOnCounter,
+      effectsRaw: c.effectsRaw
+    };
+  }
+
+  return {
+    id: c.id,
+    name: c.name,
+    type: c.type,
+    character: c.character,
+    guardHeights: c.guardHeights,
+    evadeHeights: c.evadeHeights,
+    effectsRaw: c.effectsRaw
+  };
+}
+
+const ALL_CARDS_UI = Object.keys(CARD_MAP).map(cardUi);
+
 function makeInitialGame(): Game {
-  // MVP: 카드 풀에서 앞 4장은 손패, 나머지는 리스트
   const pool = Object.keys(CARD_MAP);
   const hand = pool.slice(0, 4);
   const list = pool.slice(4);
@@ -69,13 +101,13 @@ function sendState(room: Room) {
   const viewP1 = g.getPlayerView("P1");
   const viewP2 = g.getPlayerView("P2");
 
-  const myHandCardsP1 = viewP1.me.hand.map((id: string) => ({ id, name: CARD_MAP[id]?.name ?? id }));
-  const myHandCardsP2 = viewP2.me.hand.map((id: string) => ({ id, name: CARD_MAP[id]?.name ?? id }));
+  const myHandCardsP1 = viewP1.me.hand.map((id: string) => cardUi(id));
+  const myHandCardsP2 = viewP2.me.hand.map((id: string) => cardUi(id));
 
   broadcastRoom(
     room,
-    { type: "state", view: viewP1, cards: CARD_PUBLIC, myHandCards: myHandCardsP1 },
-    { type: "state", view: viewP2, cards: CARD_PUBLIC, myHandCards: myHandCardsP2 }
+    { type: "state", view: viewP1, cards: ALL_CARDS_UI, myHandCards: myHandCardsP1 },
+    { type: "state", view: viewP2, cards: ALL_CARDS_UI, myHandCards: myHandCardsP2 }
   );
 }
 
@@ -84,7 +116,6 @@ function flushEvents(room: Room) {
   const g = room.game;
   const newEvents = g.events.slice(room.lastEventIdx);
   room.lastEventIdx = g.events.length;
-
   broadcastRoom(room, { type: "events", events: newEvents }, { type: "events", events: newEvents });
 }
 
@@ -116,14 +147,13 @@ wss.on("connection", (ws) => {
       room.sockets[pid] = ws;
       safeSend(ws, { type: "joined", room: room.id, playerId: pid });
 
-      // 둘 다 들어오면 게임 생성
       if (room.sockets.P1 && room.sockets.P2 && !room.game) {
         room.game = makeInitialGame();
         room.lastEventIdx = 0;
         flushEvents(room);
         sendState(room);
       } else {
-        safeSend(ws, { type: "state", view: { waiting: true }, cards: CARD_PUBLIC, myHandCards: [] });
+        safeSend(ws, { type: "state", view: { waiting: true }, cards: ALL_CARDS_UI, myHandCards: [] });
       }
       return;
     }
@@ -146,7 +176,6 @@ wss.on("connection", (ws) => {
   ws.on("close", () => {
     if (room && pid) {
       delete room.sockets[pid];
-      // MVP: 한 명 나가면 게임 리셋
       room.game = undefined;
       room.lastEventIdx = 0;
     }
