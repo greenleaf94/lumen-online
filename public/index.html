@@ -3,310 +3,89 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lumen Condenser MVP</title>
-  <style>
-    :root { --bd:#222; --mut:#666; --bg:#0b1020; --fg:#d8e1ff; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 16px; background:#fafafa; }
-    .top { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    .muted { color: var(--mut); }
-    code { background: #f2f2f2; padding: 2px 6px; border-radius: 6px; }
-
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:12px; }
-    .panel { border: 1px solid #ddd; border-radius: 12px; padding: 12px; background:white; }
-    .row { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start; }
-
-    .badge { display:inline-flex; gap:6px; align-items:center; border:1px solid #ddd; padding:4px 8px; border-radius:999px; font-size:12px; background:#fff; }
-    .kv { display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 10px; }
-    .kv span { font-size:13px; color:#222; }
-    .kv b { font-weight:700; }
-
-    .card {
-      width: 190px;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: transform .12s ease, box-shadow .12s ease;
-      user-select: none;
-    }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); }
-    .card[disabled] { opacity:.55; cursor:not-allowed; transform:none; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
-
-    .art {
-      height: 72px;
-      background: linear-gradient(135deg, #1f2a72, #6a2bbf);
-      display:flex; align-items:flex-end; justify-content:space-between;
-      color:white;
-      padding:10px;
-    }
-    .art .char { font-size:12px; opacity:.9; }
-    .art .type { font-size:12px; opacity:.9; }
-
-    .body { padding: 10px; }
-    .name { font-weight: 800; font-size: 14px; margin-bottom: 6px; }
-    .tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
-    .tag { font-size:11px; border:1px solid #e2e2e2; padding:3px 7px; border-radius:999px; background:#fafafa; }
-    .stats { display:flex; gap:10px; flex-wrap:wrap; font-size:12px; }
-    .stat { border:1px solid #eee; background:#fafafa; padding:4px 8px; border-radius:10px; }
-    .fx { margin-top:8px; font-size:12px; color:#333; line-height:1.25; min-height: 32px; }
-    .fx em { color:#666; font-style: normal; }
-
-    .battleBox { border:1px dashed #cfcfcf; border-radius:12px; padding:12px; background:#fff; }
-    .battleTitle { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
-    .result { font-weight:800; }
-    .flash { animation: flash .55s ease; }
-    @keyframes flash {
-      0% { box-shadow: 0 0 0 rgba(0,0,0,0); }
-      30% { box-shadow: 0 0 0 6px rgba(106,43,191,0.18); }
-      100% { box-shadow: 0 0 0 rgba(0,0,0,0); }
-    }
-
-    pre { background: var(--bg); color: var(--fg); padding: 12px; border-radius: 12px; overflow: auto; height: 260px; }
-  </style>
+  <title>Lumen Online (MVP)</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <div class="top">
-    <div>
-      <h2 style="margin:0 0 4px;">Lumen Condenser Online MVP</h2>
-      <div class="muted">같은 URL의 <code>?room=abc</code> 값을 맞추면 같은 방으로 들어갑니다.</div>
-    </div>
-    <div id="status" class="badge">연결 대기...</div>
-  </div>
+  <header class="top">
+    <h1>Lumen Online (MVP)</h1>
+    <div class="small">Deck → Setup(Hand/List) → Get Phase</div>
+  </header>
 
-  <div class="grid">
-    <div class="panel">
-      <h3 style="margin:0 0 6px;">내 정보</h3>
-      <div id="meKv" class="kv"></div>
+  <main class="grid">
+    <section class="card">
+      <h2>1) 방 입장</h2>
+      <div class="row">
+        <input id="roomId" placeholder="room id (예: test)" />
+        <button id="joinBtn">Join</button>
+      </div>
+      <div class="small" id="joinInfo"></div>
+      <div class="small">혼자 테스트: 같은 room id로 <b>탭 2개</b> 열어서 P1/P2로 들어오면 돼.</div>
+    </section>
 
-      <h3 style="margin:14px 0 6px;">상대 정보</h3>
-      <div id="oppKv" class="kv"></div>
-
-      <h3 style="margin:14px 0 6px;">내 손패 (클릭해서 제출)</h3>
-      <div id="hand" class="row"></div>
-    </div>
-
-    <div class="panel">
-      <div class="battleBox" id="battleBox">
-        <div class="battleTitle">
-          <div><b>마지막 배틀</b> <span class="muted" id="battleNote"></span></div>
-          <div class="result" id="battleResult">-</div>
+    <section class="card">
+      <h2>2) 덱 메이킹 (기술 20장)</h2>
+      <div class="two">
+        <div>
+          <h3>카드 풀</h3>
+          <div id="pool" class="list"></div>
         </div>
-        <div id="battleCards" class="row" style="margin-top:10px;"></div>
+        <div>
+          <h3>내 덱 <span id="deckCount">0</span>/20</h3>
+          <div id="deck" class="list"></div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="toSetupBtn" disabled>다음: 시작 패/리스트 고르기</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3) 게임 준비 (패 5 / 리스트 9)</h2>
+      <div class="two">
+        <div>
+          <h3>시작 패 <span id="handCount">0</span>/5</h3>
+          <div id="handPick" class="list"></div>
+        </div>
+        <div>
+          <h3>시작 리스트 <span id="listCount">0</span>/9</h3>
+          <div id="listPick" class="list"></div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="submitDeckBtn" disabled>제출(Ready)</button>
+      </div>
+      <div class="small" id="readyInfo"></div>
+    </section>
+
+    <section class="card">
+      <h2>4) 게임</h2>
+      <div class="row">
+        <button id="advanceBtn" disabled>다음 페이즈로</button>
+      </div>
+      <div class="small" id="gameMeta"></div>
+
+      <div class="two">
+        <div>
+          <h3>내 패</h3>
+          <div id="myHand" class="list"></div>
+        </div>
+        <div>
+          <h3>내 리스트 (GET에서 선택)</h3>
+          <div id="myList" class="list"></div>
+        </div>
       </div>
 
-      <h3 style="margin:14px 0 6px;">이벤트 로그</h3>
-      <pre id="log"></pre>
-    </div>
-  </div>
+      <div class="row">
+        <button id="getSkipBtn" disabled>겟 스킵</button>
+      </div>
 
-<script>
-  const params = new URLSearchParams(location.search);
-  const room = params.get("room") || "test";
+      <h3>로그</h3>
+      <pre id="log" class="log"></pre>
+    </section>
+  </main>
 
-  const proto = location.protocol === "https:" ? "wss" : "ws";
-  const ws = new WebSocket(`${proto}://${location.host}`);
-
-  let submitted = false;
-  let cardsById = new Map();
-  let lastBattleKey = "";
-
-  const $status = document.getElementById("status");
-  const $meKv = document.getElementById("meKv");
-  const $oppKv = document.getElementById("oppKv");
-  const $hand = document.getElementById("hand");
-  const $log = document.getElementById("log");
-  const $battleBox = document.getElementById("battleBox");
-  const $battleCards = document.getElementById("battleCards");
-  const $battleResult = document.getElementById("battleResult");
-  const $battleNote = document.getElementById("battleNote");
-
-  function log(line) {
-    $log.textContent += line + "\n";
-    $log.scrollTop = $log.scrollHeight;
-  }
-
-  function tag(text) {
-    const s = document.createElement("span");
-    s.className = "tag";
-    s.textContent = text;
-    return s;
-  }
-
-  function fmtHeight(h) {
-    if (!h) return "";
-    return h === "HIGH" ? "상단" : h === "MID" ? "중단" : "하단";
-  }
-  function fmtLimb(l) {
-    if (!l) return "";
-    return l === "HAND" ? "손" : "발";
-  }
-
-  function makeCardEl(c, disabled, onClick) {
-    const el = document.createElement("div");
-    el.className = "card";
-    if (disabled) el.setAttribute("disabled", "true");
-
-    const art = document.createElement("div");
-    art.className = "art";
-    art.innerHTML = `<div class="char">${c.character || ""}</div><div class="type">${c.type || ""}</div>`;
-
-    const body = document.createElement("div");
-    body.className = "body";
-
-    const name = document.createElement("div");
-    name.className = "name";
-    name.textContent = c.name || c.id;
-
-    const tags = document.createElement("div");
-    tags.className = "tags";
-    if (c.type === "ATTACK") {
-      tags.appendChild(tag(`${fmtHeight(c.judge?.height)} ${fmtLimb(c.judge?.limb)}`));
-      if (c.specialJudge && c.specialJudge !== "NONE") tags.appendChild(tag(`특수: ${c.specialJudge}`));
-    } else if (c.type === "DEFENSE") {
-      if (c.evadeHeights?.length) tags.appendChild(tag(`회피: ${c.evadeHeights.map(fmtHeight).join("/")}`));
-      if (c.guardHeights?.length) tags.appendChild(tag(`방어: ${c.guardHeights.map(fmtHeight).join("/")}`));
-    }
-
-    const stats = document.createElement("div");
-    stats.className = "stats";
-    if (c.type === "ATTACK") {
-      stats.appendChild(statBox("속도", c.speed));
-      stats.appendChild(statBox("데미지", c.damage));
-      stats.appendChild(statBox("Hit FP", c.fpOnHit ?? "-"));
-      stats.appendChild(statBox("Guard FP", c.fpOnGuard ?? "-"));
-      stats.appendChild(statBox("Counter FP", c.fpOnCounter ?? "-"));
-    }
-
-    const fx = document.createElement("div");
-    fx.className = "fx";
-    fx.innerHTML = c.effectsRaw ? c.effectsRaw : `<em>(효과 없음)</em>`;
-
-    body.appendChild(name);
-    body.appendChild(tags);
-    body.appendChild(stats);
-    body.appendChild(fx);
-
-    el.appendChild(art);
-    el.appendChild(body);
-
-    if (!disabled && onClick) {
-      el.addEventListener("click", onClick);
-    }
-    return el;
-  }
-
-  function statBox(k, v) {
-    const s = document.createElement("div");
-    s.className = "stat";
-    s.innerHTML = `<b>${k}</b> ${v}`;
-    return s;
-  }
-
-  function setKv(el, items) {
-    el.innerHTML = "";
-    items.forEach(([k, v]) => {
-      const sp = document.createElement("span");
-      sp.innerHTML = `<b>${k}</b> ${v}`;
-      el.appendChild(sp);
-    });
-  }
-
-  function renderLastBattle(view) {
-    const lb = view?.lastBattle;
-    if (!lb) {
-      $battleResult.textContent = "-";
-      $battleNote.textContent = "";
-      $battleCards.innerHTML = `<div class="muted">아직 배틀이 없습니다.</div>`;
-      return;
-    }
-
-    const key = `${lb.p1CardId}|${lb.p2CardId}|${lb.result}|${lb.note||""}`;
-    if (key !== lastBattleKey) {
-      lastBattleKey = key;
-      $battleBox.classList.remove("flash");
-      void $battleBox.offsetWidth; // reflow
-      $battleBox.classList.add("flash");
-    }
-
-    $battleResult.textContent = lb.result;
-    $battleNote.textContent = lb.note ? `(${lb.note})` : "";
-
-    const c1 = cardsById.get(lb.p1CardId) || { id: lb.p1CardId, name: lb.p1CardId, type:"UNKNOWN" };
-    const c2 = cardsById.get(lb.p2CardId) || { id: lb.p2CardId, name: lb.p2CardId, type:"UNKNOWN" };
-
-    $battleCards.innerHTML = "";
-    $battleCards.appendChild(makeCardEl(c1, true, null));
-    $battleCards.appendChild(makeCardEl(c2, true, null));
-  }
-
-  ws.onopen = () => {
-    $status.textContent = `연결됨 room=${room}`;
-    ws.send(JSON.stringify({ type: "join", room }));
-  };
-
-  ws.onmessage = (ev) => {
-    const msg = JSON.parse(ev.data);
-
-    if (msg.type === "joined") {
-      log(`[JOIN] you are ${msg.playerId} in room=${msg.room}`);
-      return;
-    }
-
-    if (msg.type === "error") {
-      log(`[ERROR] ${msg.message}`);
-      return;
-    }
-
-    if (msg.type === "events") {
-      msg.events.forEach(e => log(JSON.stringify(e)));
-      return;
-    }
-
-    if (msg.type === "state") {
-      if (Array.isArray(msg.cards)) {
-        cardsById = new Map(msg.cards.map(c => [c.id, c]));
-      }
-
-      if (msg.view?.waiting) {
-        setKv($meKv, [["상태", "상대 대기중..."]]);
-        setKv($oppKv, []);
-        $hand.innerHTML = "";
-        renderLastBattle({});
-        return;
-      }
-
-      const view = msg.view;
-      submitted = !!view.me.submitted;
-
-      setKv($meKv, [
-        ["HP", view.me.hp],
-        ["FP", view.me.fp],
-        ["Phase", view.phase],
-        ["Submitted", view.me.submitted],
-        ["List", view.me.listCount]
-      ]);
-      setKv($oppKv, [
-        ["HP", view.opp.hp],
-        ["FP", view.opp.fp],
-        ["Hand", view.opp.handCount],
-        ["Submitted", view.opp.submitted],
-        ["List", view.opp.listCount]
-      ]);
-
-      $hand.innerHTML = "";
-      msg.myHandCards.forEach(c => {
-        const disabled = submitted || view.phase !== "READY";
-        const el = makeCardEl(c, disabled, () => ws.send(JSON.stringify({ type: "select", cardId: c.id })));
-        $hand.appendChild(el);
-      });
-
-      renderLastBattle(view);
-    }
-  };
-
-  ws.onclose = () => { $status.textContent = "연결 종료"; };
-</script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
