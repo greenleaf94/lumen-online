@@ -1,5 +1,5 @@
 import { CARD_MAP } from "./cards_setsumei.js";
-import type { AttackCard, Card, CombatEvent, DefenseCard, Phase, PlayerConfig, PlayerId, PlayerState } from "./types.js";
+import type { AttackCard, CombatEvent, DefenseCard, Phase, PlayerConfig, PlayerId, PlayerState } from "./types.js";
 
 function other(p: PlayerId): PlayerId {
   return p === "P1" ? "P2" : "P1";
@@ -24,6 +24,11 @@ export class Game {
   events: CombatEvent[] = [];
   p: Record<PlayerId, PlayerState>;
 
+  // ✅ UI용: 마지막 배틀 결과를 화면에 “계속” 남김
+  lastBattle:
+    | { p1CardId: string; p2CardId: string; result: string; note?: string }
+    | null = null;
+
   constructor(p1: PlayerConfig, p2: PlayerConfig) {
     this.p = {
       P1: { hp: p1.hp, fp: p1.fp ?? 0, hand: [...p1.hand], list: [...p1.list], battleCardId: null },
@@ -45,6 +50,17 @@ export class Game {
       p1fp: this.p.P1.fp,
       p2fp: this.p.P2.fp
     });
+  }
+
+  private setBattleResult(result: string, note?: string) {
+    // 현재 제출된 카드 id를 lastBattle에 저장
+    this.lastBattle = {
+      p1CardId: this.p.P1.battleCardId!,
+      p2CardId: this.p.P2.battleCardId!,
+      result,
+      note
+    };
+    this.emit({ t: "BATTLE_RESULT", result, note });
   }
 
   ready(p: PlayerId, cardId: string) {
@@ -123,7 +139,7 @@ export class Game {
     } else if (c1.type === "DEFENSE" && c2.type === "ATTACK") {
       this.resolveAttackVsDefense("P2", c2, "P1", c1);
     } else {
-      this.emit({ t: "BATTLE_RESULT", result: "BOTH_DEFENSE" });
+      this.setBattleResult("BOTH_DEFENSE");
     }
 
     this.moveBattleToList("P1", c1.id);
@@ -135,28 +151,28 @@ export class Game {
     const p2Evade = canSpecialEvade(c2, c1);
 
     if (p1Evade && !p2Evade) {
-      this.emit({ t: "BATTLE_RESULT", result: "P1_COUNTER", note: "special evade" });
+      this.setBattleResult("P1_COUNTER", "special evade");
       this.applyCounter("P1", c1, "P2");
       return;
     }
     if (p2Evade && !p1Evade) {
-      this.emit({ t: "BATTLE_RESULT", result: "P2_COUNTER", note: "special evade" });
+      this.setBattleResult("P2_COUNTER", "special evade");
       this.applyCounter("P2", c2, "P1");
       return;
     }
 
     if (s1 === s2) {
-      this.emit({ t: "BATTLE_RESULT", result: "DOUBLE_HIT" });
+      this.setBattleResult("DOUBLE_HIT");
       this.applyHit("P1", c1, "P2");
       this.applyHit("P2", c2, "P1");
       return;
     }
 
     if (s1 < s2) {
-      this.emit({ t: "BATTLE_RESULT", result: "P1_COUNTER" });
+      this.setBattleResult("P1_COUNTER");
       this.applyCounter("P1", c1, "P2");
     } else {
-      this.emit({ t: "BATTLE_RESULT", result: "P2_COUNTER" });
+      this.setBattleResult("P2_COUNTER");
       this.applyCounter("P2", c2, "P1");
     }
   }
@@ -167,14 +183,12 @@ export class Game {
     const guardOk = def.guardHeights.includes(h);
 
     if (evadeOk) {
-      this.emit({ t: "BATTLE_RESULT", result: defenderP === "P1" ? "P1_EVADE" : "P2_EVADE" });
+      this.setBattleResult(defenderP === "P1" ? "P1_EVADE" : "P2_EVADE");
 
       if (atk.fpOnGuard) this.fpChange(attackerP, atk.fpOnGuard, `${atk.name} guarded/evaded`);
 
-      // 하이킥: 상대 회피 시 상대 +2FP
       if (atk.id === "high_kick") this.fpChange(defenderP, 2, "High Kick on opponent evade");
 
-      // 다운 가드: 회피 시 FP = (상대 기술 속도 -3), 최대 9
       if (def.id === "down_guard") {
         const gain = Math.min(9, Math.max(0, atk.speed - 3));
         this.fpChange(defenderP, gain, "Down Guard on evade");
@@ -183,18 +197,17 @@ export class Game {
     }
 
     if (guardOk) {
-      this.emit({ t: "BATTLE_RESULT", result: defenderP === "P1" ? "P1_GUARD" : "P2_GUARD" });
+      this.setBattleResult(defenderP === "P1" ? "P1_GUARD" : "P2_GUARD");
 
       if (atk.fpOnGuard) this.fpChange(attackerP, atk.fpOnGuard, `${atk.name} guarded`);
 
-      // 스탠딩/다운 가드: 방어 시 자신 200 데미지
       if (def.id === "standing_guard" || def.id === "down_guard") {
         this.damage(attackerP, defenderP, 200);
       }
       return;
     }
 
-    this.emit({ t: "BATTLE_RESULT", result: attackerP === "P1" ? "P1_HIT" : "P2_HIT" });
+    this.setBattleResult(attackerP === "P1" ? "P1_HIT" : "P2_HIT");
     this.applyHit(attackerP, atk, defenderP);
   }
 
@@ -218,12 +231,12 @@ export class Game {
     this.damage(attackerP, defenderP, atk.damage);
   }
 
-  // 클라에 보여줄 요약 뷰
   getPlayerView(p: PlayerId) {
     const me = this.p[p];
     const opp = this.p[other(p)];
     return {
       phase: this.phase,
+      lastBattle: this.lastBattle, // ✅ UI에서 활용
       me: { hp: me.hp, fp: me.fp, hand: [...me.hand], listCount: me.list.length, submitted: !!me.battleCardId },
       opp: { hp: opp.hp, fp: opp.fp, handCount: opp.hand.length, listCount: opp.list.length, submitted: !!opp.battleCardId }
     };
