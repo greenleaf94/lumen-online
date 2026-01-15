@@ -1,91 +1,40 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lumen Online (MVP)</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lumen Online - Deck Builder</title>
+  <link rel="stylesheet" href="/styles.css"/>
 </head>
 <body>
-  <header class="top">
-    <h1>Lumen Online (MVP)</h1>
-    <div class="small">Deck → Setup(Hand/List) → Get Phase</div>
-  </header>
+  <h1>Lumen Online (v1.1) - Deck Builder</h1>
 
-  <main class="grid">
-    <section class="card">
-      <h2>1) 방 입장</h2>
-      <div class="row">
-        <input id="roomId" placeholder="room id (예: test)" />
-        <button id="joinBtn">Join</button>
-      </div>
-      <div class="small" id="joinInfo"></div>
-      <div class="small">혼자 테스트: 같은 room id로 <b>탭 2개</b> 열어서 P1/P2로 들어오면 돼.</div>
-    </section>
+  <section class="panel">
+    <label>캐릭터 선택: </label>
+    <select id="characterSelect"></select>
+    <button id="clearDeckBtn">덱 초기화</button>
+    <button id="saveDeckBtn">덱 저장</button>
+    <a class="button" href="/match.html">매치 화면으로</a>
+  </section>
 
-    <section class="card">
-      <h2>2) 덱 메이킹 (기술 20장)</h2>
-      <div class="two">
-        <div>
-          <h3>카드 풀</h3>
-          <div id="pool" class="list"></div>
-        </div>
-        <div>
-          <h3>내 덱 <span id="deckCount">0</span>/20</h3>
-          <div id="deck" class="list"></div>
-        </div>
-      </div>
-      <div class="row">
-        <button id="toSetupBtn" disabled>다음: 시작 패/리스트 고르기</button>
-      </div>
-    </section>
+  <section class="grid">
+    <div class="panel">
+      <h2>특성(1장)</h2>
+      <div id="traitArea"></div>
+    </div>
 
-    <section class="card">
-      <h2>3) 게임 준비 (패 5 / 리스트 9)</h2>
-      <div class="two">
-        <div>
-          <h3>시작 패 <span id="handCount">0</span>/5</h3>
-          <div id="handPick" class="list"></div>
-        </div>
-        <div>
-          <h3>시작 리스트 <span id="listCount">0</span>/9</h3>
-          <div id="listPick" class="list"></div>
-        </div>
-      </div>
-      <div class="row">
-        <button id="submitDeckBtn" disabled>제출(Ready)</button>
-      </div>
-      <div class="small" id="readyInfo"></div>
-    </section>
+    <div class="panel">
+      <h2>기술(20장, 같은 이름 2장 이상 불가)</h2>
+      <div id="techArea"></div>
+    </div>
 
-    <section class="card">
-      <h2>4) 게임</h2>
-      <div class="row">
-        <button id="advanceBtn" disabled>다음 페이즈로</button>
-      </div>
-      <div class="small" id="gameMeta"></div>
+    <div class="panel">
+      <h2>카드 풀</h2>
+      <input id="search" placeholder="카드명 검색" />
+      <div id="cardPool"></div>
+    </div>
+  </section>
 
-      <div class="two">
-        <div>
-          <h3>내 패</h3>
-          <div id="myHand" class="list"></div>
-        </div>
-        <div>
-          <h3>내 리스트 (GET에서 선택)</h3>
-          <div id="myList" class="list"></div>
-        </div>
-      </div>
-
-      <div class="row">
-        <button id="getSkipBtn" disabled>겟 스킵</button>
-      </div>
-
-      <h3>로그</h3>
-      <pre id="log" class="log"></pre>
-    </section>
-  </main>
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/app.js"></script>
+  <script src="/deck.js"></script>
 </body>
 </html>
