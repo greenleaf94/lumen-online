@@ -7,6 +7,25 @@ import { GameState, createInitialGame, defaultPlayerState, Seat } from "./game/s
 import { advancePhase, getTakeFromList, getSkip } from "./game/engine";
 import fs from "fs";
 import path from "path";
+import express from "express";
+import path from "path";
+import fs from "fs";
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const PUBLIC_DIR = path.join(__dirname, "..", "public");
+app.use(express.static(PUBLIC_DIR));
+
+app.get("/api/cards", (req, res) => {
+  const filePath = path.join(PUBLIC_DIR, "cards_db.json");
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: "cards_db.json not found in /public" });
+  }
+  res.type("json").send(fs.readFileSync(filePath, "utf-8"));
+});
+
+app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
 
 type Room = {
   id: string;
