@@ -1,39 +1,37 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lumen Online - Deck Builder</title>
-  <link rel="stylesheet" href="/styles.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lumen Condenser - Deck Builder</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <h1>Lumen Online (v1.1) - Deck Builder</h1>
+  <div class="wrap">
+    <h1>Lumen Condenser</h1>
+    <div id="status" class="muted">로딩...</div>
 
-  <section class="panel">
-    <label>캐릭터 선택: </label>
-    <select id="characterSelect"></select>
-    <button id="clearDeckBtn">덱 초기화</button>
-    <button id="saveDeckBtn">덱 저장</button>
-    <a class="button" href="/match.html">매치 화면으로</a>
-  </section>
+    <div class="grid">
+      <section class="card">
+        <h2>카드 목록</h2>
+        <div class="filters">
+          <select id="heroFilter"></select>
+          <input id="search" placeholder="이름/코드 검색" />
+        </div>
+        <div id="cardList" class="list"></div>
+      </section>
 
-  <section class="grid">
-    <div class="panel">
-      <h2>특성(1장)</h2>
-      <div id="traitArea"></div>
+      <section class="card">
+        <h2>내 덱 <span class="muted">(총 <span id="deckCount">0</span>장)</span></h2>
+        <div class="actions">
+          <button id="btnClearDeck">덱 비우기</button>
+          <button id="btnExport">덱 JSON 내보내기</button>
+          <a class="btnLink" href="/match.html">매치 화면으로</a>
+        </div>
+        <div id="deckList" class="list"></div>
+      </section>
     </div>
-
-    <div class="panel">
-      <h2>기술(20장, 같은 이름 2장 이상 불가)</h2>
-      <div id="techArea"></div>
-    </div>
-
-    <div class="panel">
-      <h2>카드 풀</h2>
-      <input id="search" placeholder="카드명 검색" />
-      <div id="cardPool"></div>
-    </div>
-  </section>
+  </div>
 
   <script src="/deck.js"></script>
 </body>
