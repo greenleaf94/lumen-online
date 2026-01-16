@@ -1,81 +1,74 @@
-let cards = [];
-let deck = null;
-
-let myList = [];
-let myHand = [];
-
-function loadDeck() {
-  const raw = localStorage.getItem("lumen_deck_v1_1");
-  if (!raw) return null;
-  return JSON.parse(raw);
-}
-function byId(id) {
-  return cards.find(c => c.id === id);
+// ===== Deck Import/Export (Paste JSON) =====
+function setStatus(msg) {
+  const el = document.getElementById("deckLoadStatus");
+  if (el) el.textContent = msg;
 }
 
-function render() {
-  const deckInfo = document.getElementById("deckInfo");
-  if (!deck) {
-    deckInfo.innerHTML = "<b>덱이 없음</b> — / 로 돌아가서 덱을 저장해줘.";
-    return;
+function normalizeDeckPayload(payload) {
+  // 덱빌더에서 export한 형태: {version:1, deck:[id,id,...]}
+  if (payload && Array.isArray(payload.deck)) {
+    return payload.deck;
   }
-
-  deckInfo.innerHTML = `
-    <b>캐릭터:</b> ${deck.character}<br/>
-    <b>특성:</b> ${deck.trait ? byId(deck.trait)?.name : "없음"}<br/>
-    <b>기술:</b> ${deck.techniques.length}/20
-  `;
-
-  document.getElementById("myList").innerHTML = myList.map(id => {
-    const c = byId(id);
-    return `
-      <div class="cardLine">
-        <div><b>${c.name}</b> <small>${c.id}</small></div>
-        <div><button data-get="${c.id}">겟(패로)</button></div>
-      </div>
-    `;
-  }).join("");
-
-  document.getElementById("myHand").innerHTML = myHand.map(id => {
-    const c = byId(id);
-    return `<div class="cardLine"><div><b>${c.name}</b></div><div><small>${c.effectsText || ""}</small></div></div>`;
-  }).join("");
-}
-
-function doGet(cardId) {
-  // 룰북: 리스트에서 1장 보여주고 패에 넣기(지금은 로컬 시연만)
-  const idx = myList.indexOf(cardId);
-  if (idx === -1) return;
-  myList.splice(idx, 1);
-  myHand.push(cardId);
-  render();
-}
-
-async function init() {
-  const res = await fetch("/api/cards");
-  const db = await res.json();
-  cards = db.cards;
-
-  deck = loadDeck();
-  if (deck) {
-    myList = [...deck.techniques]; // 20장
-    myHand = []; // 시작 패는 일단 0장(추후 룰 반영)
+  // 혹시 사용자가 바로 배열만 붙여넣었을 때
+  if (Array.isArray(payload)) {
+    return payload;
   }
+  throw new Error("덱 JSON 형식이 올바르지 않습니다. { deck: [...] } 형태여야 해요.");
+}
 
-  document.getElementById("reloadDeck").addEventListener("click", () => {
-    deck = loadDeck();
-    if (!deck) return alert("저장된 덱이 없어!");
-    myList = [...deck.techniques];
-    myHand = [];
-    render();
+function saveDeckForPlayer(playerKey, deckArr) {
+  localStorage.setItem(playerKey, JSON.stringify(deckArr));
+}
+
+function loadDeckForPlayer(playerKey) {
+  try {
+    return JSON.parse(localStorage.getItem(playerKey) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function wireDeckPasteUI() {
+  const input = document.getElementById("deckJsonInput");
+  const btnP1 = document.getElementById("btnPasteP1");
+  const btnP2 = document.getElementById("btnPasteP2");
+  const btnClear = document.getElementById("btnClearDecks");
+
+  if (!input || !btnP1 || !btnP2 || !btnClear) return;
+
+  btnP1.addEventListener("click", () => {
+    try {
+      const payload = JSON.parse(input.value || "{}");
+      const deckArr = normalizeDeckPayload(payload);
+      saveDeckForPlayer("lumen_deck_p1", deckArr);
+      setStatus(`✅ 플레이어1 덱 저장 완료 (총 ${deckArr.length}장)`);
+    } catch (e) {
+      setStatus("❌ " + (e.message || String(e)));
+    }
   });
 
-  document.body.addEventListener("click", (e) => {
-    const gid = e.target.getAttribute("data-get");
-    if (gid) doGet(gid);
+  btnP2.addEventListener("click", () => {
+    try {
+      const payload = JSON.parse(input.value || "{}");
+      const deckArr = normalizeDeckPayload(payload);
+      saveDeckForPlayer("lumen_deck_p2", deckArr);
+      setStatus(`✅ 플레이어2 덱 저장 완료 (총 ${deckArr.length}장)`);
+    } catch (e) {
+      setStatus("❌ " + (e.message || String(e)));
+    }
   });
 
-  render();
+  btnClear.addEventListener("click", () => {
+    localStorage.removeItem("lumen_deck_p1");
+    localStorage.removeItem("lumen_deck_p2");
+    setStatus("🧹 플레이어1/2 덱 초기화 완료");
+  });
+
+  // 현재 저장된 덱 상태 표시
+  const p1 = loadDeckForPlayer("lumen_deck_p1");
+  const p2 = loadDeckForPlayer("lumen_deck_p2");
+  setStatus(`현재 저장됨: P1 ${p1.length}장 / P2 ${p2.length}장`);
 }
 
-init();
+// match.js가 로드될 때 UI 연결
+window.addEventListener("load", wireDeckPasteUI);
