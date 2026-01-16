@@ -1,154 +1,166 @@
-let cards = [];
-let state = {
-  character: "",
-  trait: null,      // cardId
-  techniques: [],   // cardId[]
-};
+// public/deck.js
+let allCards = [];
+let deck = [];
 
-function save() {
-  localStorage.setItem("lumen_deck_v1_1", JSON.stringify(state));
+function $(id) { return document.getElementById(id); }
+
+function normalizeCards(payload) {
+  if (Array.isArray(payload)) return payload;
+  if (payload && Array.isArray(payload.cards)) return payload.cards;
+  return [];
 }
 
-function load() {
-  const raw = localStorage.getItem("lumen_deck_v1_1");
-  if (raw) state = JSON.parse(raw);
+function saveDeck() {
+  localStorage.setItem("lumen_deck_v1", JSON.stringify(deck));
 }
 
-function byId(id) {
-  return cards.find(c => c.id === id);
+function loadDeck() {
+  try {
+    const v = JSON.parse(localStorage.getItem("lumen_deck_v1") || "[]");
+    if (Array.isArray(v)) deck = v;
+  } catch {}
 }
 
-function render() {
-  const traitArea = document.getElementById("traitArea");
-  const techArea = document.getElementById("techArea");
-  const pool = document.getElementById("cardPool");
-  const search = document.getElementById("search").value.trim().toLowerCase();
+function renderDeck() {
+  const el = $("deckList");
+  if (!el) return;
+  el.innerHTML = "";
 
-  traitArea.innerHTML = state.trait ? cardLine(byId(state.trait), true) : "<em>미선택</em>";
-  techArea.innerHTML = state.techniques.map(id => cardLine(byId(id), true)).join("");
+  const counts = new Map();
+  for (const id of deck) counts.set(id, (counts.get(id) || 0) + 1);
 
-  const filtered = cards
-    .filter(c => c.character === state.character)
-    .filter(c => (c.name || "").toLowerCase().includes(search))
-    .filter(c => c.judgement !== "특성"); // 풀에는 특성 제외(아래에서 특성은 별도로 선택 UI로 처리)
+  const rows = [...counts.entries()]
+    .map(([id, cnt]) => {
+      const c = allCards.find(x => x.id === id);
+      const name = c ? c.name : id;
+      const ch = c ? c.character : "?";
+      return { id, cnt, name, ch };
+    })
+    .sort((a,b)=> (a.ch+a.name).localeCompare(b.ch+b.name));
 
-  pool.innerHTML = filtered.map(c => cardLine(c, false)).join("");
-}
+  const total = deck.length;
+  $("deckCount").textContent = String(total);
 
-function cardLine(card, inDeck) {
-  if (!card) return "";
-  const btn = inDeck
-    ? `<button data-remove="${card.id}">빼기</button>`
-    : `<button data-add="${card.id}">추가</button>`;
-
-  return `
-    <div class="cardLine">
-      <div>
-        <b>${card.name}</b> <small>(${card.id})</small><br/>
-        <small>${card.judgement} / ${card.specialJudgement} | D:${card.stats.damage ?? "X"} S:${card.stats.speed ?? "X"}</small><br/>
-        <small>${card.effectsText || ""}</small>
+  for (const r of rows) {
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `
+      <div class="left">
+        <b>[${r.ch}]</b> ${r.name} <span class="muted">(${r.id})</span>
       </div>
-      <div>${btn}</div>
-    </div>
-  `;
-}
-
-function canAdd(card) {
-  // 같은 이름 2장 이상 불가
-  const already = state.techniques.map(byId).some(c => c && c.name === card.name);
-  if (already) return { ok: false, reason: "같은 이름은 1장만 가능" };
-
-  if (card.judgement === "특성") {
-    if (state.trait) return { ok: false, reason: "특성은 1장만" };
-    return { ok: true };
+      <div class="right">
+        <span class="pill">x${r.cnt}</span>
+        <button data-id="${r.id}" class="btnSmall">-</button>
+        <button data-id="${r.id}" class="btnSmall">+</button>
+      </div>
+    `;
+    div.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        if (!id) return;
+        if (btn.textContent === "+") deck.push(id);
+        else {
+          const idx = deck.lastIndexOf(id);
+          if (idx >= 0) deck.splice(idx, 1);
+        }
+        saveDeck();
+        renderDeck();
+      });
+    });
+    el.appendChild(div);
   }
-
-  if (state.techniques.length >= 20) return { ok: false, reason: "기술 20장 꽉 참" };
-  return { ok: true };
 }
 
-function addCard(id) {
-  const card = byId(id);
-  if (!card) return;
+function renderCards(list) {
+  const el = $("cardList");
+  if (!el) return;
+  el.innerHTML = "";
 
-  if (card.judgement === "특성") {
-    const chk = canAdd(card);
-    if (!chk.ok) return alert(chk.reason);
-    state.trait = id;
-    save();
-    render();
+  if (!list.length) {
+    el.innerHTML = `<div class="muted">표시할 카드가 없습니다.</div>`;
     return;
   }
 
-  const chk = canAdd(card);
-  if (!chk.ok) return alert(chk.reason);
-  state.techniques.push(id);
-  save();
-  render();
+  for (const c of list) {
+    const div = document.createElement("div");
+    div.className = "row";
+    const jt = c.judgementText || (c.judgement ? `${c.judgement.height ?? ""} ${c.judgement.limb ?? ""}` : "");
+    const sp = c.stats?.speed ?? "";
+    const dm = c.stats?.damage ?? "";
+    div.innerHTML = `
+      <div class="left">
+        <div><b>[${c.character}]</b> ${c.name}</div>
+        <div class="muted">${c.id} · ${jt} · SPD ${sp} · DMG ${dm}</div>
+      </div>
+      <div class="right">
+        <button data-id="${c.id}" class="btn">덱에 추가</button>
+      </div>
+    `;
+    div.querySelector("button").addEventListener("click", () => {
+      deck.push(c.id);
+      saveDeck();
+      renderDeck();
+    });
+    el.appendChild(div);
+  }
 }
 
-function removeCard(id) {
-  if (state.trait === id) state.trait = null;
-  state.techniques = state.techniques.filter(x => x !== id);
-  save();
-  render();
+function applyFilter() {
+  const hero = $("heroFilter").value;
+  const q = ($("search").value || "").trim().toLowerCase();
+
+  let list = allCards;
+
+  if (hero !== "ALL") {
+    list = list.filter(c => c.character === hero);
+  }
+  if (q) {
+    list = list.filter(c =>
+      (c.name || "").toLowerCase().includes(q) ||
+      (c.id || "").toLowerCase().includes(q)
+    );
+  }
+
+  renderCards(list.slice(0, 300)); // 너무 많으면 브라우저가 느려져서 상한
 }
 
-async function init() {
-  load();
+async function boot() {
+  loadDeck();
+  renderDeck();
+
+  $("status").textContent = "카드 DB 로딩 중...";
 
   const res = await fetch("/api/cards");
-  const db = await res.json();
-  cards = db.cards;
+  const payload = await res.json();
 
-  const chars = Array.from(new Set(cards.map(c => c.character))).sort();
-  const sel = document.getElementById("characterSelect");
-  sel.innerHTML = chars.map(ch => `<option value="${ch}">${ch}</option>`).join("");
+  allCards = normalizeCards(payload);
 
-  if (!state.character) state.character = chars[0] || "";
-  sel.value = state.character;
+  if (!allCards.length) {
+    $("status").textContent = "카드가 0장입니다. /api/cards/debug 를 확인하세요.";
+  } else {
+    $("status").textContent = `카드 ${allCards.length}장 로딩 완료`;
+  }
 
-  sel.addEventListener("change", () => {
-    state.character = sel.value;
-    state.trait = null;
-    state.techniques = [];
-    save();
-    render();
+  // hero dropdown 구성
+  const heroes = [...new Set(allCards.map(c => c.character))].filter(Boolean).sort();
+  const heroSel = $("heroFilter");
+  heroSel.innerHTML = `<option value="ALL">전체</option>` + heroes.map(h => `<option value="${h}">${h}</option>`).join("");
+
+  $("heroFilter").addEventListener("change", applyFilter);
+  $("search").addEventListener("input", applyFilter);
+
+  $("btnClearDeck").addEventListener("click", () => {
+    deck = [];
+    saveDeck();
+    renderDeck();
   });
 
-  document.getElementById("clearDeckBtn").addEventListener("click", () => {
-    if (!confirm("덱을 초기화할까?")) return;
-    state.trait = null;
-    state.techniques = [];
-    save();
-    render();
+  $("btnExport").addEventListener("click", () => {
+    const obj = { version: 1, deck };
+    prompt("복사해서 저장하세요 (deck json):", JSON.stringify(obj));
   });
 
-  document.getElementById("saveDeckBtn").addEventListener("click", () => {
-    save();
-    alert("덱 저장 완료! match.html에서 불러올 수 있어.");
-  });
-
-  document.getElementById("search").addEventListener("input", render);
-
-  document.body.addEventListener("click", (e) => {
-    const add = e.target.getAttribute("data-add");
-    const rem = e.target.getAttribute("data-remove");
-    if (add) addCard(add);
-    if (rem) removeCard(rem);
-  });
-
-  // 특성 선택 풀(캐릭터+특성만)
-  const traitPool = cards.filter(c => c.character === state.character && c.judgement === "특성");
-  const traitArea = document.getElementById("traitArea");
-  traitArea.insertAdjacentHTML("beforebegin", `
-    <div class="panel">
-      <h3>특성 카드 선택</h3>
-      ${traitPool.map(c => `<div class="cardLine"><div><b>${c.name}</b> <small>${c.id}</small></div><div><button data-add="${c.id}">선택</button></div></div>`).join("")}
-    </div>
-  `);
-
-  render();
+  applyFilter();
 }
 
-init();
+window.addEventListener("load", boot);
