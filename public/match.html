@@ -10,6 +10,21 @@
   <h1>Lumen Online (v1.1) - Match</h1>
   <a class="button" href="/">덱메이커로</a>
 
+  <section class="card">
+  <h2>덱 불러오기</h2>
+  <div class="muted">덱빌더에서 내보낸 JSON을 아래에 붙여넣고 저장하세요.</div>
+
+  <div style="display:flex; gap:8px; margin:8px 0;">
+    <button id="btnPasteP1">플레이어1 덱 저장</button>
+    <button id="btnPasteP2">플레이어2 덱 저장</button>
+    <button id="btnClearDecks">덱 초기화</button>
+  </div>
+
+  <textarea id="deckJsonInput" rows="8" style="width:100%;"></textarea>
+  <div id="deckLoadStatus" class="muted" style="margin-top:6px;"></div>
+  </section>
+
+  
   <section class="panel">
     <div id="deckInfo"></div>
     <button id="reloadDeck">덱 다시 불러오기</button>
